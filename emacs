@@ -18,6 +18,15 @@
 
 (setq visible-bell t)   ; use visual instead of audio bell
 
+;; VIMPULSE - vim bindings in emacs!
+
+;(add-to-list 'load-path "~/.emacs.d/vimpulse")
+;(require 'vimpulse)
+;(setq viper-mode t)                ; enable Viper at load time
+;(setq viper-ex-style-editing nil)  ; can backspace past start of insert / line
+;(setq woman-use-own-frame nil)     ; don't create new frame for manpages
+;(setq woman-use-topic-at-point t)  ; don't prompt upon K key (manpage display)
+
 ;; Org
 
 (require 'org-install)
@@ -26,21 +35,6 @@
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
 (setq org-agenda-files (list "~/org/todo.org"))
-
-;; VIMPULSE - vim bindings in emacs!
-
-(add-to-list 'load-path "~/.emacs.d/vimpulse")
-(require 'vimpulse)
-(setq woman-use-own-frame nil)     ; don't create new frame for manpages
-(setq woman-use-topic-at-point t)  ; don't prompt upon K key (manpage display)
-
-; This makes arrow keys work with visual mode in console
-;(defadvice viper-intercept-ESC-key (around
-; vimpulse-esc-exit-visual-mode activate)
-;  (when (and vimpulse-visual-mode
-;             (not (input-pending-p)))
-;    (vimpulse-visual-mode '-))
-; ad-do-it)>----~~~~~
 
 (require 'redo)       ; enables C-r (redo key)
 (require 'rect-mark)  ; enables nice-looking block visual mode
