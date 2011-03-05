@@ -1,0 +1,3 @@
+#name : lab
+# --
+\label{`(file-name-sans-extension (file-name-nondirectory (buffer-name)))`:$1} $0

@@ -1,0 +1,14 @@
+#name : incoll
+# --
+@InCollection{${1:key},
+  author     = {$2},
+  title      = {$3},
+  booktitle  = {$4},
+  pages      = {$5},
+  publisher  = {$6},
+  year       = {$7},
+  editor     = {$8},
+  address    = {$9}
+}
+
+$0

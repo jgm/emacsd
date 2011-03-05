@@ -1,0 +1,12 @@
+#name : article
+# --
+@Article{${1:key},
+  author    = {$2},
+  title     = {$3},
+  journal   = {$4},
+  volume    = {$5},
+  pages     = {$6},
+  year      = {$7}
+}
+
+$0

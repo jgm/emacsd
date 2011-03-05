@@ -1,0 +1,11 @@
+#name : book
+# --
+@Book{${1:key},
+  author    = {$2},
+  title     = {$3},
+  publisher = {$4},
+  address   = {$5},
+  year      = {$6}
+}
+
+$0
