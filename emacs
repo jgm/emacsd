@@ -78,6 +78,7 @@
              (setq hs-lint-replace-with-suggestions t)))
 (setq haskell-program-name "ghci")
 
+
 ;; Make AUCTeX aware of style files and multi-file documents
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
@@ -168,3 +169,6 @@
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
 (load custom-file 'noerror)
 
+;; local config (not in the repository)
+(if (file-exists-p "~/.emacs.d/local/init.el")
+  (load "~/.emacs.d/local/init.el"))
