@@ -172,3 +172,12 @@
 ;; local config (not in the repository)
 (if (file-exists-p "~/.emacs.d/local/init.el")
   (load "~/.emacs.d/local/init.el"))
+
+;; Internationalization
+(add-hook 'server-visit-hook
+	  (lambda ()
+	    (prefer-coding-system 'utf-8)
+	    (setq locale-coding-system 'utf-8)
+	    (set-terminal-coding-system 'utf-8)
+	    (set-keyboard-coding-system 'utf-8)
+	    (set-selection-coding-system 'utf-8)))
