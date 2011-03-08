@@ -114,7 +114,7 @@
 (require 'ido)
 (ido-mode t)
 
-(toggle-save-place-globally 1)
+;;(toggle-save-place-globally 1)
 
 (global-set-key [f2] 'recentf-open-files)
 (global-set-key [S-f2] 'dired)
