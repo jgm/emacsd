@@ -59,11 +59,12 @@
 
 ;;; Text files
 (require 'markdown-mode)
+(add-to-list 'auto-mode-alist
+	     '("\\.txt$" . markdown-mode))
 (add-hook 'text-mode-hook (lambda ()
-          (turn-on-filladapt-mode)
-          (turn-on-auto-fill)
-          (setq indent-tabs-mode nil)
-	  (markdown-mode)))
+			    (turn-on-filladapt-mode)
+			    (turn-on-auto-fill)
+			    (setq indent-tabs-mode nil)))
 
 ;;; Lisp
 (setq inferior-lisp-program "clojure")
