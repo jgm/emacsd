@@ -40,6 +40,9 @@
 		      ("dgs" . ?d)
 		      ("seminar" . ?s)
 		      ("code" . ?c)))
+(defun todo ()
+  (interactive)
+  (find-file-existing "~/org/todo.org"))
 
 (require 'redo)       ; enables C-r (redo key)
 (require 'rect-mark)  ; enables nice-looking block visual mode
