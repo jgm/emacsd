@@ -55,10 +55,12 @@
 (show-paren-mode 1)
 
 ;;; Text files
+(require 'markdown-mode)
 (add-hook 'text-mode-hook (lambda ()
           (turn-on-filladapt-mode)
           (turn-on-auto-fill)
-          (setq indent-tabs-mode nil)))
+          (setq indent-tabs-mode nil)
+	  (markdown-mode)))
 
 ;;; Lisp
 (setq inferior-lisp-program "clojure")
