@@ -35,6 +35,11 @@
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
 (setq org-agenda-files (list "~/org/todo.org"))
+(setq org-tag-alist '(("read" . ?r)
+		      ("142" . ?1)
+		      ("dgs" . ?d)
+		      ("seminar" . ?s)
+		      ("code" . ?c)))
 
 (require 'redo)       ; enables C-r (redo key)
 (require 'rect-mark)  ; enables nice-looking block visual mode
