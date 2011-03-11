@@ -119,8 +119,6 @@
 (yas/load-directory "~/.emacs.d/yasnippet-0.6.1c/snippets")
 (yas/load-directory "~/.emacs.d/mysnippets")
 
-;; (server-start)
-
 ;;; Interactively do things (switch buffers, open files)
 (require 'ido)
 (ido-mode t)
@@ -144,6 +142,18 @@
 
 (global-set-key "\M-s" 'save-buffer)
 (global-set-key "\M-g" 'goto-line)
+
+;;; Full screen for OSX
+(defun toggle-fullscreen (&optional f)
+  (interactive)
+  (let ((current-value (frame-parameter nil 'fullscreen)))
+    (set-frame-parameter nil 'fullscreen
+                         (if (equal 'fullboth current-value)
+                             (if (boundp 'old-fullscreen) old-fullscreen nil)
+                           (progn (setq old-fullscreen current-value)
+                                  'fullboth)))))
+(if (boundp 'osx-key-mode-map)
+    (define-key osx-key-mode-map (kbd "A-F") 'toggle-fullscreen))
 
 (defun switch-prev-buffer ()
   (interactive)
