@@ -40,6 +40,14 @@
 		      ("dgs" . ?d)
 		      ("seminar" . ?s)
 		      ("code" . ?c)))
+
+(setq org-default-notes-file "~/org/notes.org")
+(org-remember-insinuate)
+(global-set-key (kbd "C-c r") 'remember)
+(setq org-remember-templates
+      '(("Todo" ?t "* TODO %^{Brief Description} %^g\n%?\nAdded: %U" "~/org/todo.org" top)
+	("Note" ?n "* %^{Brief Description} %^g\n%?\nAdded: %U" "~/org/notes.org" top)))
+
 (defun todo ()
   (interactive)
   (find-file-existing "~/org/todo.org"))
@@ -62,7 +70,6 @@
 (add-to-list 'auto-mode-alist
 	     '("\\.txt$" . markdown-mode))
 (add-hook 'text-mode-hook (lambda ()
-			    (turn-on-filladapt-mode)
 			    (turn-on-auto-fill)
 			    (setq indent-tabs-mode nil)))
 
