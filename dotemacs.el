@@ -12,6 +12,10 @@
 
 (menu-bar-mode -1)
 
+;; local config (not in the repository)
+(if (file-exists-p "~/.emacs.d/local/init.el")
+  (load "~/.emacs.d/local/init.el"))
+
 (quietly-read-abbrev-file "~/.emacs.d/abbrev_defs")
 
 (recentf-mode)
@@ -196,10 +200,6 @@
 ;; keep customizations in another file
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
 (load custom-file 'noerror)
-
-;; local config (not in the repository)
-(if (file-exists-p "~/.emacs.d/local/init.el")
-  (load "~/.emacs.d/local/init.el"))
 
 ;; Internationalization
 (add-hook 'server-visit-hook
