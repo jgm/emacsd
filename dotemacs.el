@@ -78,8 +78,8 @@
 			    (setq indent-tabs-mode nil)))
 
 ;;; Lisp
-(setq inferior-lisp-program "clojure")
-;(setq inferior-lisp-program "sbcl")
+;(setq inferior-lisp-program "clojure")
+(setq inferior-lisp-program "sbcl")
 
 (add-hook 'lisp-mode-hook
     (lambda ()
