@@ -78,7 +78,6 @@
 			    (setq indent-tabs-mode nil)))
 
 ;;; Lisp
-;(setq inferior-lisp-program "clojure")
 (setq inferior-lisp-program "sbcl")
 
 (add-hook 'lisp-mode-hook
@@ -153,6 +152,9 @@
 
 (global-set-key "\M-s" 'save-buffer)
 (global-set-key "\M-g" 'goto-line)
+
+(cua-mode 'emacs)
+(global-set-key (kbd "M-SPC") 'cua-set-rectangle-mark) 
 
 ;;; Full screen for OSX
 (defun toggle-fullscreen (&optional f)
