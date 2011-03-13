@@ -177,13 +177,13 @@
 ;;; Backup .emacs files
 ;;; see chapter M.3.1 (Backup Files) in the Emacs manual
 ;;;   use numbered backups
-(setq version-control t)
+;(setq version-control t)
 ;;;   always keep the oldest backup
-(setq kept-old-versions 1)
+;(setq kept-old-versions 1)
 ;;;   keep the most recent two backups
-(setq kept-new-versions 2)
+;(setq kept-new-versions 2)
 ;;;   emacs will delete the excess middle versions silently
-(setq delete-old-versions t)
+;(setq delete-old-versions t)
 
 ;;; magit
 (require 'magit)
