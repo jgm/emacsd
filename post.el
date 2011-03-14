@@ -302,9 +302,9 @@
   (if (< (string-to-number (substring (emacs-version)
 				      (string-match "[0-9]+\.[0-9]"
 					 (emacs-version) 5))) 20)
-      (defmacro string-read (prompt) (` (read-string (, prompt))))
+      (defmacro string-read (prompt) `(read-string (, prompt)))
       (defmacro string-read (prompt)
-	(` (read-string (, prompt) nil nil nil t))))
+	`(read-string (, prompt) nil nil nil t)))
 
   ;; XEmacs gnuserv uses slightly different functions than the GNU Emacs
   ;; server, and some people are still wasting time and CPU cycles by starting
@@ -327,7 +327,7 @@
     (defmacro defgroup  (&rest rest) nil)
     (defmacro defcustom (symbol init docstring &rest rest)
       ; The "extra" braces and whitespace are for emacs < 19.29.
-      (` (defvar (, symbol) (, init) (, docstring))))
+      `(defvar (, symbol) (, init) (, docstring)))
     (defmacro defface (&rest args) nil))
   (unless (fboundp 'buffer-substring-no-properties)
     (fset 'buffer-substring-no-properties 'buffer-substring)))
