@@ -30,7 +30,8 @@
 (add-hook 'post-mode-hook 
   (lambda()
     (auto-fill-mode t)
-    (setq fill-column 72)))    ; rfc 1855 for usenet messages
+    (setq fill-column 72)  ; rfc 1855 for usenet messages
+    (post-goto-body))) 
 
 ;; VIMPULSE - vim bindings in emacs!
 
