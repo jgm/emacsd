@@ -22,6 +22,16 @@
 
 (setq visible-bell t)   ; use visual instead of audio bell
 
+;;; Configuration for editing emails in mutt
+(autoload 'post-mode "post" "mode for e-mail" t)
+(add-to-list 'auto-mode-alist 
+             '("\\.*mutt-*\\|.article\\|\\.followup" 
+                . post-mode))
+(add-hook 'post-mode-hook 
+  (lambda()
+    (auto-fill-mode t)
+    (setq fill-column 72)))    ; rfc 1855 for usenet messages
+
 ;; VIMPULSE - vim bindings in emacs!
 
 ;(add-to-list 'load-path "~/.emacs.d/vimpulse")
