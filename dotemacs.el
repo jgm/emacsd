@@ -73,7 +73,10 @@
 
 ;;; IDE
 
-(setq show-trailing-whitespace t)
+(require 'whitespace)
+(set-default 'whitespace-style 
+	     '(face tabs trailing space-before-tab space-after-tab))
+;(setq show-trailing-whitespace t)  
 ;;; Delete selected text on insert
 (delete-selection-mode 1)
 ;;; Display current column
