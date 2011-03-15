@@ -167,7 +167,7 @@ buffer instead of replacing the text in region."
 ;(color-theme-comidia)
 
 ;;; Snippets
- (add-to-list 'load-path
+(add-to-list 'load-path
                   "~/.emacs.d/yasnippet-0.6.1c")
 (require 'yasnippet)
 (yas/initialize)
