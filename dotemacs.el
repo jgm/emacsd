@@ -117,6 +117,7 @@ buffer instead of replacing the text in region."
 	     '("\\.txt$" . markdown-mode))
 (add-hook 'text-mode-hook (lambda ()
 			    (turn-on-auto-fill)
+			    (setq-default line-spacing 5)
 			    (setq indent-tabs-mode nil)))
 
 ;;; Lisp
@@ -149,6 +150,7 @@ buffer instead of replacing the text in region."
 (setq-default TeX-PDF-mode t)
 (add-hook 'LaTeX-mode-hook
     (lambda ()
+      (setq-default line-spacing 5)
       (add-to-list 'TeX-command-list '("make" "make" TeX-run-compile nil
                (latex-mode doctex-mode) :help
                "Run make"))))
