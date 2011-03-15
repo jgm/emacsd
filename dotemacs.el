@@ -11,6 +11,7 @@
 (add-to-list 'load-path "~/.emacs.d")
 
 (menu-bar-mode -1)
+(tool-bar-mode -1)
 
 ;; local config (not in the repository)
 (if (file-exists-p "~/.emacs.d/local/init.el")
