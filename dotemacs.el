@@ -202,6 +202,21 @@ buffer instead of replacing the text in region."
 (cua-mode 'emacs)
 (global-set-key (kbd "M-SPC") 'cua-set-rectangle-mark) 
 
+;;; Winner mode makes C-c left and C-c right cycle through
+;;; changes in window configuration.  We also bind ESC (arrow keys)
+;;; to window movement.  And, because these bindings are overridden
+;;; in org-mode, we also bind to C-x (arrow keys).
+(when (fboundp 'winner-mode)
+  (winner-mode 1)
+  (global-set-key (kbd "ESC <left>") 'windmove-left)
+  (global-set-key (kbd "ESC <right>") 'windmove-right)
+  (global-set-key (kbd "ESC <up>") 'windmove-up)
+  (global-set-key (kbd "ESC <down>") 'windmove-down)
+  (global-set-key (kbd "C-x <left>") 'windmove-left)
+  (global-set-key (kbd "C-x <right>") 'windmove-right)
+  (global-set-key (kbd "C-x <up>") 'windmove-up)
+  (global-set-key (kbd "C-x <down>") 'windmove-down))
+
 ;;; Full screen for OSX
 (defun toggle-fullscreen (&optional f)
   (interactive)
