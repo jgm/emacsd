@@ -1,0 +1,4 @@
+*~
+.emacs-custom.el
+local/*
+tramp
