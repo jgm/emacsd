@@ -134,7 +134,6 @@ buffer instead of replacing the text in region."
 
 ;;; Haskell
 (add-to-list 'load-path "~/.emacs.d/haskellmode-emacs")
-(require 'haskell-site-file)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 (add-hook 'haskell-mode-hook 'turn-on-font-lock)
