@@ -25,10 +25,9 @@
 (setq visible-bell t)   ; use visual instead of audio bell
 
 ;;; Show whitespace
-(require 'whitespace)
-(set-default 'whitespace-style
-	     '(tabs trailing space-before-tab space-after-tab))
-(global-whitespace-mode)
+(add-hook 'find-file-hook
+	  (lambda ()
+	    (setq show-trailing-whitespace t)))
 
 ;;; Display current column
 (column-number-mode 1)
