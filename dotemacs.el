@@ -27,15 +27,15 @@
 
 ;;; Configuration for editing emails in mutt
 (autoload 'post-mode "post" "mode for e-mail" t)
-(add-to-list 'auto-mode-alist 
-             '("\\.*mutt-*\\|.article\\|\\.followup" 
+(add-to-list 'auto-mode-alist
+             '("\\.*mutt-*\\|.article\\|\\.followup"
                 . post-mode))
-(add-hook 'post-mode-hook 
+(add-hook 'post-mode-hook
   (lambda()
     (set-default 'post-attachment-regexp "^[^>]*attach")
     (auto-fill-mode t)
     (setq fill-column 72)  ; rfc 1855 for usenet messages
-    (post-goto-body))) 
+    (post-goto-body)))
 
 ;; VIMPULSE - vim bindings in emacs!
 
@@ -206,7 +206,7 @@ buffer instead of replacing the text in region."
 (global-set-key "\M-g" 'goto-line)
 
 (cua-mode 'emacs)
-(global-set-key (kbd "M-SPC") 'cua-set-rectangle-mark) 
+(global-set-key (kbd "M-SPC") 'cua-set-rectangle-mark)
 
 ;;; Winner mode makes C-c left and C-c right cycle through
 ;;; changes in window configuration.  We also bind ESC (arrow keys)
