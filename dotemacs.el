@@ -12,6 +12,7 @@
 
 (menu-bar-mode -1)
 (if window-system
+    (fringe-mode)
     (tool-bar-mode -1))
 
 ;; local config (not in the repository)
