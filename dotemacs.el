@@ -242,6 +242,10 @@
 (autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
 (autoload 'camldebug "camldebug" "Run the Caml debugger" t)
 
+;;; Coq
+(setq auto-mode-alist (cons '("\\.v$" . coq-mode) auto-mode-alist))
+(autoload 'coq-mode "coq" "Major mode for editing Coq vernacular." t)
+
 ;;; LaTeX (AUCTeX)
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
