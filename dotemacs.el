@@ -42,11 +42,10 @@
 (ido-mode t)
 
 (global-set-key [f3] 'query-replace-regexp)
-(global-set-key [f4] 'delete-other-windows)
-(global-set-key [f5] 'switch-prev-buffer)
-(global-set-key [S-f5] 'kill-this-buffer)
-(global-set-key [f6] 'other-window)
-(global-set-key [S-f6] 'delete-window)
+(global-set-key [f4] 'switch-prev-buffer)
+(global-set-key [f5] 'kill-this-buffer)
+(global-set-key [f6] 'delete-window)
+(global-set-key [S-f6] 'delete-other-windows)
 
 (global-set-key "\M-s" 'save-buffer)
 (global-set-key "\M-g" 'goto-line)
