@@ -144,6 +144,11 @@ buffer instead of replacing the text in region."
              (setq hs-lint-replace-with-suggestions t)))
 (setq haskell-program-name "ghci")
 
+;;; OCaml
+(add-to-list 'load-path "~/.emacs.d/tuareg-2.0.4")
+(add-to-list 'auto-mode-alist '("\\.ml[iylp]?" . tuareg-mode))
+(autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
+(autoload 'camldebug "camldebug" "Run the Caml debugger" t)
 
 ;; Make AUCTeX aware of style files and multi-file documents
 (setq TeX-auto-save t)
