@@ -179,23 +179,30 @@
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
-(setq org-agenda-files (list "~/org/todo.org"))
+(setq org-directory
+      (if (string= (car (split-string (system-name) "\\.")) "protagoras")
+	  "~/org/"
+	"/ssh:work:org/"))
+(setq org-agenda-files (mapcar (lambda (x) (concat org-directory x))
+			       '("todo.org")))
 (setq org-tag-alist '(("read" . ?r)
 		      ("142" . ?1)
 		      ("dgs" . ?d)
 		      ("seminar" . ?s)
 		      ("code" . ?c)))
-(setq org-default-notes-file "~/org/notes.org")
-
+(setq org-default-notes-file (concat org-directory "wiki.org"))
 (org-remember-insinuate)
 (global-set-key (kbd "C-c r") 'remember)
 (setq org-remember-templates
-      '(("Todo" ?t "* TODO %^{Brief Description} %^g\n%?\nAdded: %U" "~/org/todo.org" top)
-	("Note" ?n "* %^{Brief Description} %^g\n%?\nAdded: %U" "~/org/notes.org" top)))
+      '(("Todo" ?t "* TODO %^{Brief Description} %^g\n%?\nAdded: %U" (car org-agenda-files) "UNFILED")
+	("Note" ?n "* %^{Brief Description} %^g\n%?\nAdded: %U" org-default-notes-file "UNFILED")))
 
 (defun todo ()
   (interactive)
-  (find-file-existing "~/org/todo.org"))
+  (find-file-existing (car org-agenda-files)))
+(defun wiki ()
+  (interactive)
+  (find-file-existing (concat org-directory "wiki.org")))
 
 (require 'generalized-shell-command)
 (global-set-key (kbd "M-!") 'generalized-shell-command)
