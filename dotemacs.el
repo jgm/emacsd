@@ -39,6 +39,12 @@
 
 ;;; Interactively do things (switch buffers, open files)
 (require 'ido)
+(setq completion-ignored-extensions '(".pdf" ".aux" ".toc" ".tex~"))
+(setq ido-ignore-extensions t)
+(setq ido-file-extensions-order '(".org" ".txt" ".tex" ".bib" ".el" ".xml" ".html" ".text" ".rb" ".py" ".ml" ".hs" ".cabal" ".css" ".js"))
+(add-hook 'ido-setup-hook 
+          (lambda () 
+            (define-key ido-completion-map [tab] 'ido-next-match)))
 (ido-mode t)
 
 (global-set-key [f3] 'query-replace-regexp)
