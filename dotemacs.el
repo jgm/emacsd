@@ -273,10 +273,11 @@
 (add-hook 'latex-mode-hook 'turn-on-reftex)   ; with Emacs latex mode
 
 ;;; Colors
-;(require 'color-theme)
-;(color-theme-charcoal-black)
-;(color-theme-billw)
-;(color-theme-comidia)
+(defun colors ()
+  (interactive)
+  (require 'color-theme)
+  (color-theme-initialize)
+  (color-theme-select))
 
 ;;; Snippets
 (add-to-list 'load-path
