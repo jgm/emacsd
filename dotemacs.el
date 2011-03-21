@@ -178,6 +178,7 @@
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
+(setq org-return-follows-link t)
 (setq org-log-done t)
 (setq org-server
       (if (string= (car (split-string (system-name) "\\.")) "protagoras")
