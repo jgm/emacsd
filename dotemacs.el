@@ -179,18 +179,19 @@
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
-(setq org-directory
+(setq org-server
       (if (string= (car (split-string (system-name) "\\.")) "protagoras")
-	  "~/org/"
-	"/ssh:work:org/"))
-(setq org-agenda-files (mapcar (lambda (x) (concat org-directory x))
-			       '("todo.org")))
+	  "~/"
+	"/ssh:work:"))
+(setq org-agenda-files (mapcar (lambda (x) (concat org-server x))
+			       '("org/todo.org")))
 (setq org-tag-alist '(("read" . ?r)
 		      ("142" . ?1)
 		      ("dgs" . ?d)
 		      ("seminar" . ?s)
 		      ("code" . ?c)))
-(setq org-default-notes-file (concat org-directory "wiki.org"))
+(setq wiki-entry-point (concat org-server "wiki/wiki.org"))
+(setq org-default-notes-file wiki-entry-point)
 (org-remember-insinuate)
 (global-set-key (kbd "C-c r") 'remember)
 (setq org-remember-templates
@@ -202,7 +203,7 @@
   (find-file-existing (car org-agenda-files)))
 (defun wiki ()
   (interactive)
-  (find-file-existing (concat org-directory "wiki.org")))
+  (find-file-existing wiki-entry-point))
 
 (require 'generalized-shell-command)
 (global-set-key (kbd "M-!") 'generalized-shell-command)
