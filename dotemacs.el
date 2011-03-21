@@ -196,6 +196,7 @@
 		      ("142" . ?1)
 		      ("dgs" . ?d)
 		      ("seminar" . ?s)
+		      ("work" . ?w)
 		      ("code" . ?c)))
 (setq wiki-entry-point (concat org-server "wiki/wiki.org"))
 (setq org-default-notes-file wiki-entry-point)
