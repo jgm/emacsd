@@ -2,3 +2,8 @@
 .emacs-custom.el
 local/*
 tramp
+/tuareg-2.0.4/append-tuareg.elc
+/tuareg-2.0.4/camldebug.elc
+/tuareg-2.0.4/custom-tuareg.elc
+/tuareg-2.0.4/ocamlspot.elc
+/tuareg-2.0.4/tuareg.elc
