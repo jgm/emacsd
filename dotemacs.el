@@ -35,6 +35,9 @@
 ;;; Show parentheses matching
 (show-paren-mode 1)
 
+;;; Use spaces for automatic indentation
+(setq indent-tabs-mode nil)
+
 (quietly-read-abbrev-file "~/.emacs.d/abbrev_defs")
 
 ;;; Interactively do things (switch buffers, open files)
