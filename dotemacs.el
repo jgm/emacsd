@@ -273,6 +273,7 @@
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
 (setq-default TeX-master nil)
+(setq-default reftex-toc-split-windows-horizontally t)
 (setq-default TeX-PDF-mode t)
 (add-hook 'LaTeX-mode-hook
     (lambda ()
