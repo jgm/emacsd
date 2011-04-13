@@ -92,6 +92,9 @@
 (if (boundp 'osx-key-mode-map)
     (define-key osx-key-mode-map (kbd "A-F") 'toggle-fullscreen))
 
+;;; Line cursor not block
+(setq-default cursor-type 'bar)
+
 (defun switch-prev-buffer ()
   (interactive)
   (switch-to-buffer (other-buffer)))
