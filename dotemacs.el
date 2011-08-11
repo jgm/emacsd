@@ -80,18 +80,6 @@
   (global-set-key (kbd "C-x <up>") 'windmove-up)
   (global-set-key (kbd "C-x <down>") 'windmove-down))
 
-;;; Full screen for OSX
-(defun toggle-fullscreen (&optional f)
-  (interactive)
-  (let ((current-value (frame-parameter nil 'fullscreen)))
-    (set-frame-parameter nil 'fullscreen
-                         (if (equal 'fullboth current-value)
-                             (if (boundp 'old-fullscreen) old-fullscreen nil)
-                           (progn (setq old-fullscreen current-value)
-                                  'fullboth)))))
-(if (boundp 'osx-key-mode-map)
-    (define-key osx-key-mode-map (kbd "A-F") 'toggle-fullscreen))
-
 ;;; Line cursor not block
 (setq-default cursor-type 'bar)
 
