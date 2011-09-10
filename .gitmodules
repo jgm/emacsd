@@ -1,3 +1,6 @@
 [submodule "vimpulse"]
 	path = vimpulse
 	url = git://gitorious.org/vimpulse/vimpulse.git
+[submodule "deft"]
+	path = deft
+	url = git://jblevins.org/git/deft.git
