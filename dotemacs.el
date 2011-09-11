@@ -173,6 +173,12 @@
 ;(setq woman-use-own-frame nil)     ; don't create new frame for manpages
 ;(setq woman-use-topic-at-point t)  ; don't prompt upon K key (manpage display)
 
+;;; Deft
+(setq deft-extension "txt")
+(setq deft-directory "~/Dropbox/notes")
+(setq deft-text-mode 'markdown-mode)
+(global-set-key [f8] 'deft)
+
 ;;; Org
 (require 'org-install)
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
