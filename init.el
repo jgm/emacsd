@@ -173,7 +173,9 @@
 ;(setq woman-use-own-frame nil)     ; don't create new frame for manpages
 ;(setq woman-use-topic-at-point t)  ; don't prompt upon K key (manpage display)
 
-;;; Deft
+;;; Deft - note taking
+(add-to-list 'load-path "~/.emacs.d/deft")
+(require 'deft)
 (setq deft-extension "txt")
 (setq deft-directory "~/Dropbox/notes")
 (setq deft-text-mode 'markdown-mode)
