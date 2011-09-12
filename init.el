@@ -177,7 +177,7 @@
 (add-to-list 'load-path "~/.emacs.d/deft")
 (require 'deft)
 (setq deft-extension "txt")
-(setq deft-directory "~/notes")
+(setq deft-directory "~/notes/")
 (setq deft-text-mode 'markdown-mode)
 (global-set-key [f8] 'deft)
 
