@@ -1,10 +1,19 @@
 (defun evil-space-del (statemap)
   (define-key statemap (kbd "SPC") (lambda ()
 				     (interactive)
-				     (next-line 10)
-				     (evil-scroll-line-down 10))))
+				     (evil-scroll-down nil)))
+  (define-key statemap (kbd "DEL") (lambda ()
+				     (interactive)
+				     (evil-scroll-up nil))))
 (evil-space-del evil-normal-state-map)
 (evil-space-del evil-visual-state-map)
+
+(define-key evil-normal-state-map (kbd "C-n") (lambda ()
+						(interactive)
+						(evil-next-buffer)))
+(define-key evil-normal-state-map (kbd "C-p") (lambda ()
+						(interactive)
+						(evil-prev-buffer)))
 
 ; make evil work for org-mode!
 (evil-define-key 'normal org-mode-map "O" (lambda ()
