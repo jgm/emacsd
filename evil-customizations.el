@@ -1,15 +1,10 @@
-; simulate vim's "nnoremap <space> 10<c-e>10j"
-(define-key evil-normal-state-map (kbd "SPC") (lambda ()
-                     (interactive)
-                     (next-line 10)
-                     (evil-scroll-line-down 10)
-                     ))
-; simulate vim's "nnoremap <backspace> 10<c-y>10k"
-(define-key evil-normal-state-map (kbd "DEL") (lambda ()
-                     (interactive)
-                     (previous-line 10)
-                     (evil-scroll-line-up 10)
-                     ))
+(defun evil-space-del (statemap)
+  (define-key statemap (kbd "SPC") (lambda ()
+				     (interactive)
+				     (next-line 10)
+				     (evil-scroll-line-down 10))))
+(evil-space-del evil-normal-state-map)
+(evil-space-del evil-visual-state-map)
 
 ; make evil work for org-mode!
 (evil-define-key 'normal org-mode-map "O" (lambda ()
