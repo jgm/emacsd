@@ -4,3 +4,6 @@
 [submodule "deft"]
 	path = deft
 	url = git://jblevins.org/git/deft.git
+[submodule "evil"]
+	path = evil
+	url = git://gitorious.org/evil/evil.git
