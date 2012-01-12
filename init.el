@@ -165,32 +165,6 @@
     (setq fill-column 72)  ; rfc 1855 for usenet messages
     (post-goto-body)))
 
-;;; EVIL mode - vim bindings
-(add-to-list 'load-path "~/.emacs.d/evil")
-(require 'evil)  
-(evil-mode 1)
-;; The following will create a minor mode foo-mode with Normal
-;; state bindings for the keys w and e:
-;;      (define-minor-mode foo-mode
-;;        "Foo mode."
-;;        :keymap (make-sparse-keymap))
-;;      (evil-define-key ’normal foo-mode-map "w" ’bar)
-;;      (evil-define-key ’normal foo-mode-map "e" ’baz)
-;; This minor mode can then be enabled in any buffers where the
-;; custom bindings are desired:
-;;     (add-hook ’text-mode-hook ’foo-mode) ; enable alongside text-mode
-;;
-;; Define a command with command properties keyword-args.
-;;   (evil-define-command command (args. . .) doc keyword-args. . . body. . .)
-
-;;; Deft - note taking
-(add-to-list 'load-path "~/.emacs.d/deft")
-(require 'deft)
-(setq deft-extension "txt")
-(setq deft-directory "~/notes/")
-(setq deft-text-mode 'markdown-mode)
-(global-set-key [f8] 'deft)
-
 ;;; Org
 (require 'org-install)
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
@@ -224,6 +198,110 @@
 (defun wiki ()
   (interactive)
   (find-file-existing wiki-entry-point))
+
+;;; EVIL mode - vim bindings
+(add-to-list 'load-path "~/.emacs.d/evil")
+(require 'evil)
+(evil-mode 1)
+
+; simulate vim's "nnoremap <space> 10<c-e>10j"
+(define-key evil-normal-state-map (kbd "SPC") (lambda ()
+                     (interactive)
+                     (next-line 10)
+                     (evil-scroll-line-down 10)
+                     ))
+; simulate vim's "nnoremap <backspace> 10<c-y>10k"
+(define-key evil-normal-state-map (kbd "DEL") (lambda ()
+                     (interactive)
+                     (previous-line 10)
+                     (evil-scroll-line-up 10)
+                     ))
+
+; make evil work for org-mode!
+(evil-define-key 'normal org-mode-map "O" (lambda ()
+                     (interactive)
+                     (end-of-line)
+                     (org-insert-heading)
+                     (evil-append nil)
+                     ))
+
+(defun always-insert-item ()
+     (interactive)
+     (if (not (org-in-item-p))
+       (insert "\n- ")
+       (org-insert-item)))
+
+(evil-define-key 'normal org-mode-map "O" (lambda ()
+                     (interactive)
+                     (end-of-line)
+                     (org-insert-heading)
+                     (evil-append nil)
+                     ))
+(evil-define-key 'normal org-mode-map "o" (lambda ()
+                     (interactive)
+                     (end-of-line)
+                     (always-insert-item)
+                     (evil-append nil)
+                     ))
+(evil-define-key 'normal org-mode-map "t" (lambda ()
+                     (interactive)
+                     (end-of-line)
+                     (org-insert-todo-heading nil)
+                     (evil-append nil)
+                     ))
+(evil-define-key 'normal org-mode-map (kbd "M-o") (lambda ()
+                     (interactive)
+                     (end-of-line)
+                     (org-insert-heading)
+                     (org-metaright)
+                     (evil-append nil)
+                     ))
+(evil-define-key 'normal org-mode-map (kbd "M-t") (lambda ()
+                     (interactive)
+                     (end-of-line)
+                     (org-insert-todo-heading nil)
+                     (org-metaright)
+                     (evil-append nil)
+                     ))
+(evil-define-key 'normal org-mode-map "T" 'org-todo) ; mark a TODO item as DONE
+(evil-define-key 'normal org-mode-map ";a" 'org-agenda) ; access agenda buffer
+(evil-define-key 'normal org-mode-map "-" 'org-cycle-list-bullet) ; change bullet style
+
+; allow us to access org-mode keys directly from Evil's Normal mode
+(evil-define-key 'normal org-mode-map "L" 'org-shiftright)
+(evil-define-key 'normal org-mode-map "H" 'org-shiftleft)
+(evil-define-key 'normal org-mode-map "K" 'org-shiftup)
+(evil-define-key 'normal org-mode-map "J" 'org-shiftdown)
+(evil-define-key 'normal org-mode-map (kbd "M-l") 'org-metaright)
+(evil-define-key 'normal org-mode-map (kbd "M-h") 'org-metaleft)
+(evil-define-key 'normal org-mode-map (kbd "M-k") 'org-metaup)
+(evil-define-key 'normal org-mode-map (kbd "M-j") 'org-metadown)
+(evil-define-key 'normal org-mode-map (kbd "M-L") 'org-shiftmetaright)
+(evil-define-key 'normal org-mode-map (kbd "M-H") 'org-shiftmetaleft)
+(evil-define-key 'normal org-mode-map (kbd "M-K") 'org-shiftmetaup)
+(evil-define-key 'normal org-mode-map (kbd "M-J") 'org-shiftmetadown)
+
+;; The following will create a minor mode foo-mode with Normal
+;; state bindings for the keys w and e:
+;;      (define-minor-mode foo-mode
+;;        "Foo mode."
+;;        :keymap (make-sparse-keymap))
+;;      (evil-define-key ’normal foo-mode-map "w" ’bar)
+;;      (evil-define-key ’normal foo-mode-map "e" ’baz)
+;; This minor mode can then be enabled in any buffers where the
+;; custom bindings are desired:
+;;     (add-hook ’text-mode-hook ’foo-mode) ; enable alongside text-mode
+;;
+;; Define a command with command properties keyword-args.
+;;   (evil-define-command command (args. . .) doc keyword-args. . . body. . .)
+
+;;; Deft - note taking
+(add-to-list 'load-path "~/.emacs.d/deft")
+(require 'deft)
+(setq deft-extension "txt")
+(setq deft-directory "~/notes/")
+(setq deft-text-mode 'markdown-mode)
+(global-set-key [f8] 'deft)
 
 (require 'generalized-shell-command)
 (global-set-key (kbd "M-!") 'generalized-shell-command)
