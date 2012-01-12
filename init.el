@@ -266,6 +266,7 @@
 (evil-define-key 'normal org-mode-map "T" 'org-todo) ; mark a TODO item as DONE
 (evil-define-key 'normal org-mode-map ";a" 'org-agenda) ; access agenda buffer
 (evil-define-key 'normal org-mode-map "-" 'org-cycle-list-bullet) ; change bullet style
+(evil-define-key 'normal org-mode-map (kbd "TAB") 'org-cycle) ; cycle
 
 ; allow us to access org-mode keys directly from Evil's Normal mode
 (evil-define-key 'normal org-mode-map "L" 'org-shiftright)
