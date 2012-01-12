@@ -165,13 +165,23 @@
     (setq fill-column 72)  ; rfc 1855 for usenet messages
     (post-goto-body)))
 
-;;; VIMPULSE - vim bindings in emacs!
-;(add-to-list 'load-path "~/.emacs.d/vimpulse")
-;(require 'vimpulse)
-;(setq viper-mode t)                ; enable Viper at load time
-;(setq viper-ex-style-editing nil)  ; can backspace past start of insert / line
-;(setq woman-use-own-frame nil)     ; don't create new frame for manpages
-;(setq woman-use-topic-at-point t)  ; don't prompt upon K key (manpage display)
+;;; EVIL mode - vim bindings
+(add-to-list 'load-path "~/.emacs.d/evil")
+(require 'evil)  
+(evil-mode 1)
+;; The following will create a minor mode foo-mode with Normal
+;; state bindings for the keys w and e:
+;;      (define-minor-mode foo-mode
+;;        "Foo mode."
+;;        :keymap (make-sparse-keymap))
+;;      (evil-define-key ’normal foo-mode-map "w" ’bar)
+;;      (evil-define-key ’normal foo-mode-map "e" ’baz)
+;; This minor mode can then be enabled in any buffers where the
+;; custom bindings are desired:
+;;     (add-hook ’text-mode-hook ’foo-mode) ; enable alongside text-mode
+;;
+;; Define a command with command properties keyword-args.
+;;   (evil-define-command command (args. . .) doc keyword-args. . . body. . .)
 
 ;;; Deft - note taking
 (add-to-list 'load-path "~/.emacs.d/deft")
