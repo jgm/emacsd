@@ -14,7 +14,7 @@
 (define-key evil-normal-state-map (kbd "C-p") (lambda ()
 						(interactive)
 						(evil-prev-buffer)))
-(define-key evil-normal-state-map (kbd "\\ q") (lambda ()
+(define-key evil-normal-state-map (kbd "C-\\") (lambda ()
 						(interactive)
 						(fill-paragraph)))
 
