@@ -50,15 +50,6 @@
             (define-key ido-completion-map [tab] 'ido-next-match)))
 (ido-mode t)
 
-(global-set-key [f3] 'query-replace-regexp)
-(global-set-key [f4] 'switch-prev-buffer)
-(global-set-key [f5] 'kill-this-buffer)
-(global-set-key [f6] 'delete-window)
-(global-set-key [S-f6] 'delete-other-windows)
-
-(global-set-key "\M-s" 'save-buffer)
-(global-set-key "\M-g" 'goto-line)
-
 (cua-mode 'emacs)
 (global-set-key (kbd "M-SPC") 'cua-set-rectangle-mark)
 (require 'rect-mark)  ; enables nice-looking block visual mode
@@ -100,41 +91,6 @@
 	    (set-keyboard-coding-system 'utf-8)
 	    (set-selection-coding-system 'utf-8)))
 
-;;; Interactively do things (switch buffers, open files)
-(require 'ido)
-(ido-mode t)
-
-(global-set-key [f3] 'query-replace-regexp)
-(global-set-key [f4] 'delete-other-windows)
-(global-set-key [f5] 'switch-prev-buffer)
-(global-set-key [S-f5] 'kill-this-buffer)
-(global-set-key [f6] 'other-window)
-(global-set-key [S-f6] 'delete-window)
-
-(global-set-key "\M-s" 'save-buffer)
-(global-set-key "\M-g" 'goto-line)
-
-(cua-mode 'emacs)
-(global-set-key (kbd "M-SPC") 'cua-set-rectangle-mark)
-(require 'rect-mark)  ; enables nice-looking block visual mode
-;;; Delete selected text on insert
-(delete-selection-mode 1)
-
-;;; Winner mode makes C-c left and C-c right cycle through
-;;; changes in window configuration.  We also bind ESC (arrow keys)
-;;; to window movement.  And, because these bindings are overridden
-;;; in org-mode, we also bind to C-x (arrow keys).
-(when (fboundp 'winner-mode)
-  (winner-mode 1)
-  (global-set-key (kbd "ESC <left>") 'windmove-left)
-  (global-set-key (kbd "ESC <right>") 'windmove-right)
-  (global-set-key (kbd "ESC <up>") 'windmove-up)
-  (global-set-key (kbd "ESC <down>") 'windmove-down)
-  (global-set-key (kbd "C-x <left>") 'windmove-left)
-  (global-set-key (kbd "C-x <right>") 'windmove-right)
-  (global-set-key (kbd "C-x <up>") 'windmove-up)
-  (global-set-key (kbd "C-x <down>") 'windmove-down))
-
 ;;; Full screen for OSX
 (defun toggle-fullscreen (&optional f)
   (interactive)
@@ -146,12 +102,6 @@
                                   'fullboth)))))
 (if (boundp 'osx-key-mode-map)
     (define-key osx-key-mode-map (kbd "A-F") 'toggle-fullscreen))
-
-(defun switch-prev-buffer ()
-  (interactive)
-  (switch-to-buffer (other-buffer)))
-
-(setq-default ispell-program-name "aspell")
 
 ;;; Configuration for editing emails in mutt
 (autoload 'post-mode "post" "mode for e-mail" t)
@@ -254,42 +204,42 @@
 ;; Interaction with inferior Haskell interpreter: just hit C-c C-z  or  C-c C-l.
 
 ;;; OCaml
-(add-to-list 'load-path "~/.emacs.d/tuareg-2.0.4")
-(add-to-list 'auto-mode-alist '("\\.ml[iylp]?" . tuareg-mode))
-(autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
-(autoload 'camldebug "camldebug" "Run the Caml debugger" t)
+; (add-to-list 'load-path "~/.emacs.d/tuareg-2.0.4")
+; (add-to-list 'auto-mode-alist '("\\.ml[iylp]?" . tuareg-mode))
+; (autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
+; (autoload 'camldebug "camldebug" "Run the Caml debugger" t)
 
 ;;; Coq
-(setq auto-mode-alist (cons '("\\.v$" . coq-mode) auto-mode-alist))
-(autoload 'coq-mode "coq" "Major mode for editing Coq vernacular." t)
+; (setq auto-mode-alist (cons '("\\.v$" . coq-mode) auto-mode-alist))
+; (autoload 'coq-mode "coq" "Major mode for editing Coq vernacular." t)
 
 ;;; LaTeX (AUCTeX)
-(setq TeX-auto-save t)
-(setq TeX-parse-self t)
-(setq-default TeX-master nil)
-(setq-default reftex-toc-split-windows-horizontally t)
-(setq-default TeX-PDF-mode t)
-(add-hook 'LaTeX-mode-hook
-    (lambda ()
-      (add-to-list 'TeX-command-list '("make" "make" TeX-run-compile nil
-               (latex-mode doctex-mode) :help
-               "Run make"))))
-(add-hook 'LaTeX-mode-hook 'turn-on-reftex)   ; with AUCTeX LaTeX mode
-(add-hook 'latex-mode-hook 'turn-on-reftex)   ; with Emacs latex mode
+; (setq TeX-auto-save t)
+; (setq TeX-parse-self t)
+; (setq-default TeX-master nil)
+; (setq-default reftex-toc-split-windows-horizontally t)
+; (setq-default TeX-PDF-mode t)
+; (add-hook 'LaTeX-mode-hook
+;     (lambda ()
+;       (add-to-list 'TeX-command-list '("make" "make" TeX-run-compile nil
+;                (latex-mode doctex-mode) :help
+;                "Run make"))))
+; (add-hook 'LaTeX-mode-hook 'turn-on-reftex)   ; with AUCTeX LaTeX mode
+; (add-hook 'latex-mode-hook 'turn-on-reftex)   ; with Emacs latex mode
 
 ;; from http://superuser.com/questions/125027/word-count-for-latex-within-emacs
-(defun my-latex-setup ()
-  (defun latex-word-count ()
-    (interactive)
-    (let* ((this-file (buffer-file-name))
-           (word-count
-            (with-output-to-string
-              (with-current-buffer standard-output
-                (call-process "texcount" nil t nil "-brief" "-inc" this-file)))))
-      (string-match "\n$" word-count)
-      (message (replace-match "" nil nil word-count))))
-    (define-key LaTeX-mode-map "\C-cw" 'latex-word-count))
-(add-hook 'LaTeX-mode-hook 'my-latex-setup t)
+; (defun my-latex-setup ()
+;   (defun latex-word-count ()
+;     (interactive)
+;     (let* ((this-file (buffer-file-name))
+;            (word-count
+;             (with-output-to-string
+;               (with-current-buffer standard-output
+;                 (call-process "texcount" nil t nil "-brief" "-inc" this-file)))))
+;       (string-match "\n$" word-count)
+;       (message (replace-match "" nil nil word-count))))
+;     (define-key LaTeX-mode-map "\C-cw" 'latex-word-count))
+; (add-hook 'LaTeX-mode-hook 'my-latex-setup t)
 
 ;;; Colors
 (defun colors ()
