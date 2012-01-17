@@ -14,6 +14,9 @@
 (define-key evil-normal-state-map (kbd "C-p") (lambda ()
 						(interactive)
 						(evil-prev-buffer)))
+(define-key evil-normal-state-map (kbd "\\ q") (lambda ()
+						(interactive)
+						(fill-paragraph)))
 
 ; make evil work for org-mode!
 (evil-define-key 'normal org-mode-map "O" (lambda ()
