@@ -271,6 +271,14 @@
 (require 'magit)
 (global-set-key "\C-cg" 'magit-status)
 
+;;; tidy xml buffer
+(defun xml-tidy-buffer ()
+  (interactive)
+  (shell-command-on-region (point-min) (point-max)
+			   "tidy -q -xml -utf8 -i" t t)
+  (keyboard-quit))
+
 ;; keep customizations in another file
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
 (load custom-file 'noerror)
+ 
