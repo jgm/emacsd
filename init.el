@@ -278,6 +278,13 @@
 			   "tidy -q -xml -utf8 -i" t t)
   (keyboard-quit))
 
+;;; full ack
+(add-to-list 'load-path "~/.emacs.d/full-ack")
+(autoload 'ack-same  "full-ack" nil t)
+(autoload 'ack "full-ack" nil t)
+(autoload 'ack-find-same-file "full-ack" nil t)
+(autoload 'ack-find-file "full-ack" nil t)
+
 ;; keep customizations in another file
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
 (load custom-file 'noerror)

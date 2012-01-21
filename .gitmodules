@@ -7,3 +7,6 @@
 [submodule "evil"]
 	path = evil
 	url = git://gitorious.org/evil/evil.git
+[submodule "full-ack"]
+	path = full-ack
+	url = git://github.com/nschum/full-ack.git
