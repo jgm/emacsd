@@ -285,7 +285,17 @@
 (autoload 'ack-find-same-file "full-ack" nil t)
 (autoload 'ack-find-file "full-ack" nil t)
 
+;; Make C-x k kill buffer w/o prompt if emacsclient
+(add-hook 'server-switch-hook
+	  (lambda ()
+	    (when (current-local-map)
+	      (use-local-map (copy-keymap (current-local-map))))
+	    (when server-buffer-clients
+	      (local-set-key (kbd "C-x k") 'server-edit))))
+
+;; Rebind C-x C-b so it doesn't list buffers in other window.
+(global-set-key (kbd "C-x C-b") 'buffer-menu)
+
 ;; keep customizations in another file
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
 (load custom-file 'noerror)
- 

@@ -83,6 +83,19 @@
 (evil-define-key 'normal org-mode-map (kbd "M-K") 'org-shiftmetaup)
 (evil-define-key 'normal org-mode-map (kbd "M-J") 'org-shiftmetadown)
 
+;;; Next and previous error
+
+(evil-ex-define-cmd "[cn]ext" 'next-error)
+(evil-ex-define-cmd "[c]prev" 'previous-error)
+
+;;; Make
+
+(evil-ex-define-cmd "make" 'compile)
+
+;;; ZZ
+
+(define-key evil-normal-state-map "ZZ" 'evil-save-and-close)
+
 ;; The following will create a minor mode foo-mode with Normal
 ;; state bindings for the keys w and e:
 ;;      (define-minor-mode foo-mode
@@ -96,4 +109,3 @@
 ;;
 ;; Define a command with command properties keyword-args.
 ;;   (evil-define-command command (args. . .) doc keyword-args. . . body. . .)
-
