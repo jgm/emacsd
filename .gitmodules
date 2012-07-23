@@ -10,3 +10,6 @@
 [submodule "full-ack"]
 	path = full-ack
 	url = git://github.com/nschum/full-ack.git
+[submodule "haskell-mode"]
+	path = haskell-mode
+	url = https://github.com/haskell/haskell-mode.git
