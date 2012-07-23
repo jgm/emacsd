@@ -185,23 +185,14 @@
 (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
 
 ;;; Haskell
-(add-to-list 'load-path "~/.emacs.d/haskellmode-emacs")
-(require 'haskell-mode)
-(add-to-list 'auto-mode-alist
-	     '("\\.hs$" . haskell-mode))
+(load "~/.emacs.d/haskell-mode/haskell-site-file")
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-(add-hook 'haskell-mode-hook 'turn-on-font-lock)
-(add-hook 'haskell-mode-hook (lambda () (require 'inf-haskell)))
-(add-hook 'haskell-mode-hook (lambda ()
-             (require 'hs-lint)
-             (setq hs-lint-command "~/.cabal/bin/hlint")
-             (setq hs-lint-replace-with-suggestions t)))
-(setq haskell-program-name "ghci")
-;; Declaration scanning: just use M-x imenu or bind `imenu' to a key.  E.g.
-;; (global-set-key [(control meta down-mouse-3)] 'imenu) or you can also add
-;; it to the menubar with (add-hook 'haskell-mode-hook 'imenu-add-menubar-index)
-;; Interaction with inferior Haskell interpreter: just hit C-c C-z  or  C-c C-l.
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+(add-hook 'haskell-mode-hook 'font-lock-mode)
+(global-set-key [(control meta down-mouse-3)] 'imenu)
+;; Interaction with inferior Haskell interpreter: just hit C-c C-z or C-c C-l.
 
 ;;; OCaml
 ; (add-to-list 'load-path "~/.emacs.d/tuareg-2.0.4")
