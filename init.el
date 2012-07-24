@@ -122,10 +122,7 @@
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-return-follows-link t)
 (setq org-log-done t)
-(setq org-server
-      (if (string= (car (split-string (system-name) "\\.")) "protagoras")
-	  "~/"
-	"/ssh:work:"))
+(setq org-server "~/Dropbox/")
 (setq org-agenda-files (mapcar (lambda (x) (concat org-server x))
 			       '("org/todo.org")))
 (setq org-tag-alist '(("read" . ?r)
