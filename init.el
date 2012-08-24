@@ -229,6 +229,9 @@
 ;     (define-key LaTeX-mode-map "\C-cw" 'latex-word-count))
 ; (add-hook 'LaTeX-mode-hook 'my-latex-setup t)
 
+;;; LaTeX lightweight
+(add-hook 'latex-mode-hook 'turn-on-reftex)   ; with Emacs latex mode
+
 ;;; Colors
 (defun colors ()
   (interactive)
