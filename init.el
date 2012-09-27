@@ -171,6 +171,11 @@
 			    (turn-on-auto-fill)
 			    (setq indent-tabs-mode nil)))
 
+;;; Rust
+(add-to-list 'load-path "~/.emacs.d/rust")
+(require 'rust-mode)
+(add-to-list 'auto-mode-alist '("\\.rs$" . rust-mode))
+
 ;;; Lisp
 (setq inferior-lisp-program "sbcl")
 
