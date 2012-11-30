@@ -176,6 +176,9 @@
 (require 'rust-mode)
 (add-to-list 'auto-mode-alist '("\\.rs$" . rust-mode))
 
+;;; Javascript
+(setq js-indent-level 2)
+
 ;;; Lisp
 (setq inferior-lisp-program "sbcl")
 
