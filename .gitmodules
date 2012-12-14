@@ -13,3 +13,6 @@
 [submodule "haskell-mode"]
 	path = haskell-mode
 	url = https://github.com/haskell/haskell-mode.git
+[submodule "js2-mode"]
+	path = js2-mode
+	url = https://github.com/mooz/js2-mode.git
