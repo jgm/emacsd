@@ -115,6 +115,12 @@
     (setq fill-column 72)  ; rfc 1855 for usenet messages
     (post-goto-body)))
 
+;;; EVIL mode - vim bindings
+(add-to-list 'load-path "~/.emacs.d/evil")
+(require 'evil)
+(evil-mode 1)
+(load "evil-customizations")
+
 ;;; Org
 (require 'org-install)
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
@@ -145,12 +151,6 @@
 (defun wiki ()
   (interactive)
   (find-file-existing wiki-entry-point))
-
-;;; EVIL mode - vim bindings
-(add-to-list 'load-path "~/.emacs.d/evil")
-(require 'evil)
-(evil-mode 1)
-(load "evil-customizations")
 
 ;;; Deft - note taking
 (add-to-list 'load-path "~/.emacs.d/deft")
