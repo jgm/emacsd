@@ -70,10 +70,6 @@
 (evil-define-key 'normal org-mode-map (kbd "TAB") 'org-cycle) ; cycle
 
 ; allow us to access org-mode keys directly from Evil's Normal mode
-(evil-define-key 'normal org-mode-map "L" 'org-shiftright)
-(evil-define-key 'normal org-mode-map "H" 'org-shiftleft)
-(evil-define-key 'normal org-mode-map "K" 'org-shiftup)
-(evil-define-key 'normal org-mode-map "J" 'org-shiftdown)
 (evil-define-key 'normal org-mode-map (kbd "M-l") 'org-metaright)
 (evil-define-key 'normal org-mode-map (kbd "M-h") 'org-metaleft)
 (evil-define-key 'normal org-mode-map (kbd "M-k") 'org-metaup)
