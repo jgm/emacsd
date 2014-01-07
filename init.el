@@ -139,7 +139,7 @@
 		      ("code" . ?c)))
 (setq wiki-entry-point (concat org-server "wiki/wiki.org"))
 (setq org-default-notes-file wiki-entry-point)
-(org-remember-insinuate)
+;; (org-remember-insinuate)
 (global-set-key (kbd "C-c r") 'remember)
 (setq org-remember-templates
       '(("Todo" ?t "* TODO %^{Brief Description} %^g\n%?\nAdded: %U" (car org-agenda-files) "UNFILED")
