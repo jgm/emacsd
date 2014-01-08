@@ -176,9 +176,9 @@
 			    (setq indent-tabs-mode nil)))
 
 ;;; Rust
-(add-to-list 'load-path "~/.emacs.d/rust")
-(require 'rust-mode)
-(add-to-list 'auto-mode-alist '("\\.rs$" . rust-mode))
+;; (add-to-list 'load-path "~/.emacs.d/rust")
+;; (require 'rust-mode)
+;; (add-to-list 'auto-mode-alist '("\\.rs$" . rust-mode))
 
 ;;; Javascript
 (add-to-list 'load-path "~/.emacs.d/js2-mode")
@@ -187,17 +187,17 @@
 (setq js2-basic-offset 2)
 
 ;;; Go
-(require 'go-mode-load)
+;; (require 'go-mode-load)
 
 ;;; Lisp
-(setq inferior-lisp-program "sbcl")
+;; (setq inferior-lisp-program "sbcl")
 
-(add-hook 'lisp-mode-hook
-    (lambda ()
-      (slime-mode t)
-      ;;(paredit-mode +1)
-      (setq lisp-indent-function 'common-lisp-indent-function)))
-(add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
+;; (add-hook 'lisp-mode-hook
+;;     (lambda ()
+;;       (slime-mode t)
+;;       ;;(paredit-mode +1)
+;;       (setq lisp-indent-function 'common-lisp-indent-function)))
+;; (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
 
 ;;; Haskell
 (load "~/.emacs.d/haskell-mode/haskell-site-file")
@@ -210,42 +210,42 @@
 ;; Interaction with inferior Haskell interpreter: just hit C-c C-z or C-c C-l.
 
 ;;; OCaml
-; (add-to-list 'load-path "~/.emacs.d/tuareg-2.0.4")
-; (add-to-list 'auto-mode-alist '("\\.ml[iylp]?" . tuareg-mode))
-; (autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
-; (autoload 'camldebug "camldebug" "Run the Caml debugger" t)
+;; (add-to-list 'load-path "~/.emacs.d/tuareg-2.0.4")
+;; (add-to-list 'auto-mode-alist '("\\.ml[iylp]?" . tuareg-mode))
+;; (autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
+;; (autoload 'camldebug "camldebug" "Run the Caml debugger" t)
 
 ;;; Coq
-; (setq auto-mode-alist (cons '("\\.v$" . coq-mode) auto-mode-alist))
-; (autoload 'coq-mode "coq" "Major mode for editing Coq vernacular." t)
+;; (setq auto-mode-alist (cons '("\\.v$" . coq-mode) auto-mode-alist))
+;; (autoload 'coq-mode "coq" "Major mode for editing Coq vernacular." t)
 
 ;;; LaTeX (AUCTeX)
-; (setq TeX-auto-save t)
-; (setq TeX-parse-self t)
-; (setq-default TeX-master nil)
-; (setq-default reftex-toc-split-windows-horizontally t)
-; (setq-default TeX-PDF-mode t)
-; (add-hook 'LaTeX-mode-hook
-;     (lambda ()
-;       (add-to-list 'TeX-command-list '("make" "make" TeX-run-compile nil
-;                (latex-mode doctex-mode) :help
-;                "Run make"))))
-; (add-hook 'LaTeX-mode-hook 'turn-on-reftex)   ; with AUCTeX LaTeX mode
-; (add-hook 'latex-mode-hook 'turn-on-reftex)   ; with Emacs latex mode
+;; (setq TeX-auto-save t)
+;; (setq TeX-parse-self t)
+;; (setq-default TeX-master nil)
+;; (setq-default reftex-toc-split-windows-horizontally t)
+;; (setq-default TeX-PDF-mode t)
+;; (add-hook 'LaTeX-mode-hook
+;;     (lambda ()
+;;       (add-to-list 'TeX-command-list '("make" "make" TeX-run-compile nil
+;;                (latex-mode doctex-mode) :help
+;;                "Run make"))))
+;; (add-hook 'LaTeX-mode-hook 'turn-on-reftex)   ; with AUCTeX LaTeX mode
+;; (add-hook 'latex-mode-hook 'turn-on-reftex)   ; with Emacs latex mode
 
 ;; from http://superuser.com/questions/125027/word-count-for-latex-within-emacs
-; (defun my-latex-setup ()
-;   (defun latex-word-count ()
-;     (interactive)
-;     (let* ((this-file (buffer-file-name))
-;            (word-count
-;             (with-output-to-string
-;               (with-current-buffer standard-output
-;                 (call-process "texcount" nil t nil "-brief" "-inc" this-file)))))
-;       (string-match "\n$" word-count)
-;       (message (replace-match "" nil nil word-count))))
-;     (define-key LaTeX-mode-map "\C-cw" 'latex-word-count))
-; (add-hook 'LaTeX-mode-hook 'my-latex-setup t)
+;; (defun my-latex-setup ()
+;;   (defun latex-word-count ()
+;;     (interactive)
+;;     (let* ((this-file (buffer-file-name))
+;;            (word-count
+;;             (with-output-to-string
+;;               (with-current-buffer standard-output
+;;                 (call-process "texcount" nil t nil "-brief" "-inc" this-file)))))
+;;       (string-match "\n$" word-count)
+;;       (message (replace-match "" nil nil word-count))))
+;;     (define-key LaTeX-mode-map "\C-cw" 'latex-word-count))
+;; (add-hook 'LaTeX-mode-hook 'my-latex-setup t)
 
 ;;; LaTeX lightweight
 (add-hook 'latex-mode-hook 'turn-on-reftex)   ; with Emacs latex mode
@@ -258,12 +258,10 @@
   (color-theme-select))
 
 ;;; Snippets
-(add-to-list 'load-path
-                  "~/.emacs.d/yasnippet-0.6.1c")
 (require 'yasnippet)
-(yas/initialize)
-(yas/load-directory "~/.emacs.d/yasnippet-0.6.1c/snippets")
-(yas/load-directory "~/.emacs.d/mysnippets")
+(setq yas/root-directory "~/.emacs.d/snippets")
+(yas/load-directory yas/root-directory)
+(yas/global-mode 1)
 
 ;;; Backup .emacs files
 ;;; see chapter M.3.1 (Backup Files) in the Emacs manual
