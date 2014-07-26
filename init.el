@@ -3,12 +3,16 @@
 ;;; interfacing with ELPA, the package archive.
 ;;; Move this code earlier if you want to reference
 ;;; packages in your .emacs.
-(when
-    (load
-     (expand-file-name "~/.emacs.d/elpa/package.el"))
-  (package-initialize))
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (package-initialize)
+  (add-to-list 'package-archives
+               '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  )
 
 (add-to-list 'load-path "~/.emacs.d")
+
+(setq inhibit-splash-screen t)         ; hide welcome screen
 
 ;;; Local config (not in the repository)
 (if (file-exists-p "~/.emacs.d/local/init.el")
@@ -117,8 +121,11 @@
     (post-goto-body)))
 
 ;;; EVIL mode - vim bindings
-(add-to-list 'load-path "~/.emacs.d/evil")
+;(add-to-list 'load-path "~/.emacs.d/evil") ; (now we use MELPA version)
 (require 'evil)
+(require 'evil-leader)
+(evil-leader/set-leader ",")
+(require 'evil-jumper)
 (evil-mode 1)
 (load "evil-customizations")
 
