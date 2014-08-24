@@ -5,12 +5,20 @@
 ;;; packages in your .emacs.
 (when (>= emacs-major-version 24)
   (require 'package)
-  (package-initialize)
   (add-to-list 'package-archives
                '("melpa" . "http://melpa.milkbox.net/packages/") t)
-  )
+  (package-initialize)
+  (mapc
+    (lambda (package)
+      (unless (package-installed-p package)
+        (package-install package)))
+   '(use-package evil evil-leader evil-jumper deft markdown-mode
+      magit full-ack yasnippet js2-mode)))
 
 (add-to-list 'load-path "~/.emacs.d")
+
+(add-to-list 'load-path "~/.emacs.d/use-package")
+(require 'use-package)
 
 (setq inhibit-splash-screen t)         ; hide welcome screen
 
@@ -56,7 +64,7 @@
 
 (cua-mode 'emacs)
 (global-set-key (kbd "M-SPC") 'cua-set-rectangle-mark)
-(require 'rect-mark)  ; enables nice-looking block visual mode
+(use-package rect-mark)  ; enables nice-looking block visual mode
 ;;; Delete selected text on insert
 (delete-selection-mode 1)
 
@@ -121,16 +129,17 @@
     (post-goto-body)))
 
 ;;; EVIL mode - vim bindings
-;(add-to-list 'load-path "~/.emacs.d/evil") ; (now we use MELPA version)
-(require 'evil)
-(require 'evil-leader)
+(use-package evil)
+(use-package evil-leader
+  :ensure evil-leader)
 (evil-leader/set-leader ",")
-(require 'evil-jumper)
+(use-package evil-jumper
+  :ensure evil-jumper)
 (evil-mode 1)
 (load "evil-customizations")
 
 ;;; Org
-(require 'org-install)
+;; (use-package org-install)
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
@@ -161,18 +170,17 @@
   (find-file-existing wiki-entry-point))
 
 ;;; Deft - note taking
-(add-to-list 'load-path "~/.emacs.d/deft")
-(require 'deft)
+(use-package deft)
 (setq deft-extension "txt")
 (setq deft-directory "~/Dropbox/notes/")
 (setq deft-text-mode 'markdown-mode)
 (global-set-key [f8] 'deft)
 
-(require 'generalized-shell-command)
+(use-package generalized-shell-command)
 (global-set-key (kbd "M-!") 'generalized-shell-command)
 
 ;;; Text files
-(require 'markdown-mode)
+(use-package markdown-mode)
 (add-to-list 'auto-mode-alist
 	     '("\\.txt$" . markdown-mode))
 (add-to-list 'auto-mode-alist
@@ -185,17 +193,16 @@
 
 ;;; Rust
 ;; (add-to-list 'load-path "~/.emacs.d/rust")
-;; (require 'rust-mode)
+;; (use-package rust-mode)
 ;; (add-to-list 'auto-mode-alist '("\\.rs$" . rust-mode))
 
 ;;; Javascript
-(add-to-list 'load-path "~/.emacs.d/js2-mode")
-(autoload 'js2-mode "js2-mode" nil t)
+(use-package js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (setq js2-basic-offset 2)
 
 ;;; Go
-;; (require 'go-mode-load)
+;; (use-package go-mode-load)
 
 ;;; Lisp
 ;; (setq inferior-lisp-program "sbcl")
@@ -208,7 +215,7 @@
 ;; (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
 
 ;;; Haskell
-(require 'haskell-mode)
+(use-package haskell-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
@@ -261,12 +268,12 @@
 ;;; Colors
 (defun colors ()
   (interactive)
-  (require 'color-theme)
+  (use-package color-theme)
   (color-theme-initialize)
   (color-theme-select))
 
 ;;; Snippets
-(require 'yasnippet)
+(use-package yasnippet)
 (setq yas/root-directory "~/.emacs.d/snippets")
 (yas/load-directory yas/root-directory)
 (yas/global-mode 1)
@@ -283,7 +290,7 @@
 ;(setq delete-old-versions t)
 
 ;;; magit
-(require 'magit)
+(use-package magit)
 (global-set-key "\C-cg" 'magit-status)
 
 ;;; tidy xml buffer
@@ -294,7 +301,6 @@
   (keyboard-quit))
 
 ;;; full ack
-(add-to-list 'load-path "~/.emacs.d/full-ack")
 (autoload 'ack-same  "full-ack" nil t)
 (autoload 'ack "full-ack" nil t)
 (autoload 'ack-find-same-file "full-ack" nil t)
