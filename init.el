@@ -100,16 +100,16 @@
 
 ;;; Full screen for OSX
 
-;; (defun toggle-fullscreen (&optional f)
-;;   (interactive)
-;;   (let ((current-value (frame-parameter nil 'fullscreen)))
-;;     (set-frame-parameter nil 'fullscreen
-;;                          (if (equal 'fullboth current-value)
-;;                              (if (boundp 'old-fullscreen) old-fullscreen nil)
-;;                            (progn (setq old-fullscreen current-value)
-;;                                   'fullboth)))))
-;; (if (boundp 'osx-key-mode-map)
-;;     (define-key osx-key-mode-map (kbd "A-F") 'toggle-fullscreen))
+(defun toggle-fullscreen (&optional f)
+  (interactive)
+  (let ((current-value (frame-parameter nil 'fullscreen)))
+    (set-frame-parameter nil 'fullscreen
+                         (if (equal 'fullboth current-value)
+                             (if (boundp 'old-fullscreen) old-fullscreen nil)
+                           (progn (setq old-fullscreen current-value)
+                                  'fullboth)))))
+(if (boundp 'osx-key-mode-map)
+    (define-key osx-key-mode-map (kbd "A-F") 'toggle-fullscreen))
 
 ;;; Configuration for editing emails in mutt
 ;; autoload 'post-mode "post" "mode for e-mail" t)
