@@ -213,6 +213,11 @@
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 (add-hook 'haskell-mode-hook 'font-lock-mode)
 (global-set-key [(control meta down-mouse-3)] 'imenu)
+(eval-after-load 'haskell-mode
+  '(define-key haskell-mode-map [f8] 'haskell-navigate-imports))
+(setenv "PATH" (concat "~/.cabal/bin:~/Library/Haskell/bin:" (getenv "PATH")))
+(add-to-list 'exec-path "~/.cabal/bin:~/Library/Haskell/bin:")
+(custom-set-variables '(haskell-tags-on-save t))
 ;; Interaction with inferior Haskell interpreter: just hit C-c C-z or C-c C-l.
 
 ;;; OCaml
