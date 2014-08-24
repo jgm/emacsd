@@ -168,7 +168,7 @@
 (setq deft-extension "txt")
 (setq deft-directory "~/Dropbox/notes/")
 (setq deft-text-mode 'markdown-mode)
-(global-set-key [f8] 'deft)
+(global-set-key [f9] 'deft)
 
 (use-package generalized-shell-command)
 (global-set-key (kbd "M-!") 'generalized-shell-command)
