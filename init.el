@@ -1,22 +1,26 @@
-;;; This was installed by package-install.el.
-;;; This provides support for the package system and
-;;; interfacing with ELPA, the package archive.
-;;; Move this code earlier if you want to reference
-;;; packages in your .emacs.
+(setq my-packages
+   '(use-package evil evil-leader evil-jumper deft markdown-mode
+     magit full-ack yasnippet js2-mode phi-rectangle haskell-mode))
+
 (when (>= emacs-major-version 24)
   (require 'package)
-  (package-initialize)
   (add-to-list 'package-archives
                '("melpa" . "http://melpa.milkbox.net/packages/") t)
-  )
+  (package-initialize)
+  ;; Fetch packages from melpa/elpa if not present:
+  (mapc
+    (lambda (package)
+      (unless (package-installed-p package)
+        (package-install package))) my-packages))
+
+(require 'use-package)
 
 (add-to-list 'load-path "~/.emacs.d")
-
-(setq inhibit-splash-screen t)         ; hide welcome screen
-
 ;;; Local config (not in the repository)
 (if (file-exists-p "~/.emacs.d/local/init.el")
   (load "~/.emacs.d/local/init.el"))
+
+(setq inhibit-splash-screen t)         ; hide welcome screen
 
 (menu-bar-mode -1)
 (if window-system
@@ -42,6 +46,9 @@
 ;;; Use spaces for automatic indentation
 (setq-default indent-tabs-mode nil)
 
+;;; Ask y-or-n instead of yes-or-no
+(fset 'yes-or-no-p 'y-or-n-p)
+
 (quietly-read-abbrev-file "~/.emacs.d/abbrev_defs")
 
 ;;; Interactively do things (switch buffers, open files)
@@ -49,31 +56,27 @@
 (setq completion-ignored-extensions '(".pdf" ".aux" ".toc" ".tex~"))
 (setq ido-ignore-extensions t)
 (setq ido-file-extensions-order '(".org" ".txt" ".tex" ".bib" ".el" ".xml" ".html" ".text" ".rb" ".py" ".ml" ".hs" ".cabal" ".css" ".js"))
-(add-hook 'ido-setup-hook 
-          (lambda () 
+(add-hook 'ido-setup-hook
+          (lambda ()
             (define-key ido-completion-map [tab] 'ido-next-match)))
 (ido-mode t)
 
 (cua-mode 'emacs)
 (global-set-key (kbd "M-SPC") 'cua-set-rectangle-mark)
-(require 'rect-mark)  ; enables nice-looking block visual mode
+
+(require 'phi-rectangle)  ; enables nice-looking block visual mode
 ;;; Delete selected text on insert
 (delete-selection-mode 1)
 
 ;;; Winner mode makes C-c left and C-c right cycle through
-;;; changes in window configuration.  We also bind ESC (arrow keys)
-;;; to window movement.  And, because these bindings are overridden
-;;; in org-mode, we also bind to C-x (arrow keys).
-;; (when (fboundp 'winner-mode)
-;;   (winner-mode 1)
-;;   (global-set-key (kbd "ESC <left>") 'windmove-left)
-;;   (global-set-key (kbd "ESC <right>") 'windmove-right)
-;;   (global-set-key (kbd "ESC <up>") 'windmove-up)
-;;   (global-set-key (kbd "ESC <down>") 'windmove-down)
-;;   (global-set-key (kbd "C-x <left>") 'windmove-left)
-;;   (global-set-key (kbd "C-x <right>") 'windmove-right)
-;;   (global-set-key (kbd "C-x <up>") 'windmove-up)
-;;   (global-set-key (kbd "C-x <down>") 'windmove-down))
+;;; changes in window configuration.  We also bind C-x (arrow keys)
+;;; to window movement.
+(when (fboundp 'winner-mode)
+  (winner-mode 1)
+  (global-set-key (kbd "C-x <left>") 'windmove-left)
+  (global-set-key (kbd "C-x <right>") 'windmove-right)
+  (global-set-key (kbd "C-x <up>") 'windmove-up)
+  (global-set-key (kbd "C-x <down>") 'windmove-down))
 
 ;;; Line cursor not block
 (setq-default cursor-type 'bar)
@@ -89,48 +92,47 @@
 ;; Internationalization
 (add-hook 'server-visit-hook
 	  (lambda ()
-	    (prefer-coding-system 'utf-8)
-	    (setq locale-coding-system 'utf-8)
-	    (set-terminal-coding-system 'utf-8)
-	    (set-keyboard-coding-system 'utf-8)
-	    (set-selection-coding-system 'utf-8)))
+ 	    (prefer-coding-system 'utf-8)
+ 	    (setq locale-coding-system 'utf-8)
+ 	    (set-terminal-coding-system 'utf-8)
+ 	    (set-keyboard-coding-system 'utf-8)
+ 	    (set-selection-coding-system 'utf-8)))
 
 ;;; Full screen for OSX
 
-(defun toggle-fullscreen (&optional f)
-  (interactive)
-  (let ((current-value (frame-parameter nil 'fullscreen)))
-    (set-frame-parameter nil 'fullscreen
-                         (if (equal 'fullboth current-value)
-                             (if (boundp 'old-fullscreen) old-fullscreen nil)
-                           (progn (setq old-fullscreen current-value)
-                                  'fullboth)))))
-(if (boundp 'osx-key-mode-map)
-    (define-key osx-key-mode-map (kbd "A-F") 'toggle-fullscreen))
+;; (defun toggle-fullscreen (&optional f)
+;;   (interactive)
+;;   (let ((current-value (frame-parameter nil 'fullscreen)))
+;;     (set-frame-parameter nil 'fullscreen
+;;                          (if (equal 'fullboth current-value)
+;;                              (if (boundp 'old-fullscreen) old-fullscreen nil)
+;;                            (progn (setq old-fullscreen current-value)
+;;                                   'fullboth)))))
+;; (if (boundp 'osx-key-mode-map)
+;;     (define-key osx-key-mode-map (kbd "A-F") 'toggle-fullscreen))
 
 ;;; Configuration for editing emails in mutt
-(autoload 'post-mode "post" "mode for e-mail" t)
-(add-to-list 'auto-mode-alist
-             '("\\.*mutt-*\\|.article\\|\\.followup"
-                . post-mode))
-(add-hook 'post-mode-hook
-  (lambda()
-    (set-default 'post-attachment-regexp "^[^>]*attach")
-    (auto-fill-mode t)
-    (setq fill-column 72)  ; rfc 1855 for usenet messages
-    (post-goto-body)))
+;; autoload 'post-mode "post" "mode for e-mail" t)
+;; (add-to-list 'auto-mode-alist
+;;              '("\\.*mutt-*\\|.article\\|\\.followup"
+;;                 . post-mode))
+;; (add-hook 'post-mode-hook
+;;   (lambda()
+;;     (set-default 'post-attachment-regexp "^[^>]*attach")
+;;     (auto-fill-mode t)
+;;     (setq fill-column 72)  ; rfc 1855 for usenet messages
+;;     (post-goto-body)))
 
 ;;; EVIL mode - vim bindings
-;(add-to-list 'load-path "~/.emacs.d/evil") ; (now we use MELPA version)
-(require 'evil)
-(require 'evil-leader)
+(use-package evil)
+(use-package evil-leader)
 (evil-leader/set-leader ",")
-(require 'evil-jumper)
+(use-package evil-jumper)
 (evil-mode 1)
 (load "evil-customizations")
 
 ;;; Org
-(require 'org-install)
+;; (use-package org-install)
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
@@ -156,23 +158,23 @@
 (defun todo ()
   (interactive)
   (find-file-existing (car org-agenda-files)))
+
 (defun wiki ()
   (interactive)
   (find-file-existing wiki-entry-point))
 
 ;;; Deft - note taking
-(add-to-list 'load-path "~/.emacs.d/deft")
-(require 'deft)
+(use-package deft)
 (setq deft-extension "txt")
 (setq deft-directory "~/Dropbox/notes/")
 (setq deft-text-mode 'markdown-mode)
 (global-set-key [f8] 'deft)
 
-(require 'generalized-shell-command)
+(use-package generalized-shell-command)
 (global-set-key (kbd "M-!") 'generalized-shell-command)
 
 ;;; Text files
-(require 'markdown-mode)
+(use-package markdown-mode)
 (add-to-list 'auto-mode-alist
 	     '("\\.txt$" . markdown-mode))
 (add-to-list 'auto-mode-alist
@@ -185,17 +187,13 @@
 
 ;;; Rust
 ;; (add-to-list 'load-path "~/.emacs.d/rust")
-;; (require 'rust-mode)
+;; (use-package rust-mode)
 ;; (add-to-list 'auto-mode-alist '("\\.rs$" . rust-mode))
 
 ;;; Javascript
-(add-to-list 'load-path "~/.emacs.d/js2-mode")
-(autoload 'js2-mode "js2-mode" nil t)
+(use-package js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (setq js2-basic-offset 2)
-
-;;; Go
-;; (require 'go-mode-load)
 
 ;;; Lisp
 ;; (setq inferior-lisp-program "sbcl")
@@ -208,7 +206,7 @@
 ;; (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
 
 ;;; Haskell
-(require 'haskell-mode)
+(use-package haskell-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
@@ -228,6 +226,7 @@
 ;; (autoload 'coq-mode "coq" "Major mode for editing Coq vernacular." t)
 
 ;;; LaTeX (AUCTeX)
+;; (use-package auctex)
 ;; (setq TeX-auto-save t)
 ;; (setq TeX-parse-self t)
 ;; (setq-default TeX-master nil)
@@ -241,32 +240,18 @@
 ;; (add-hook 'LaTeX-mode-hook 'turn-on-reftex)   ; with AUCTeX LaTeX mode
 ;; (add-hook 'latex-mode-hook 'turn-on-reftex)   ; with Emacs latex mode
 
-;; from http://superuser.com/questions/125027/word-count-for-latex-within-emacs
-;; (defun my-latex-setup ()
-;;   (defun latex-word-count ()
-;;     (interactive)
-;;     (let* ((this-file (buffer-file-name))
-;;            (word-count
-;;             (with-output-to-string
-;;               (with-current-buffer standard-output
-;;                 (call-process "texcount" nil t nil "-brief" "-inc" this-file)))))
-;;       (string-match "\n$" word-count)
-;;       (message (replace-match "" nil nil word-count))))
-;;     (define-key LaTeX-mode-map "\C-cw" 'latex-word-count))
-;; (add-hook 'LaTeX-mode-hook 'my-latex-setup t)
-
 ;;; LaTeX lightweight
 (add-hook 'latex-mode-hook 'turn-on-reftex)   ; with Emacs latex mode
 
 ;;; Colors
 (defun colors ()
   (interactive)
-  (require 'color-theme)
+  (use-package color-theme)
   (color-theme-initialize)
   (color-theme-select))
 
 ;;; Snippets
-(require 'yasnippet)
+(use-package yasnippet)
 (setq yas/root-directory "~/.emacs.d/snippets")
 (yas/load-directory yas/root-directory)
 (yas/global-mode 1)
@@ -283,7 +268,7 @@
 ;(setq delete-old-versions t)
 
 ;;; magit
-(require 'magit)
+(use-package magit)
 (global-set-key "\C-cg" 'magit-status)
 
 ;;; tidy xml buffer
@@ -294,7 +279,6 @@
   (keyboard-quit))
 
 ;;; full ack
-(add-to-list 'load-path "~/.emacs.d/full-ack")
 (autoload 'ack-same  "full-ack" nil t)
 (autoload 'ack "full-ack" nil t)
 (autoload 'ack-find-same-file "full-ack" nil t)
