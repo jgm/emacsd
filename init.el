@@ -1,30 +1,26 @@
-;;; This was installed by package-install.el.
-;;; This provides support for the package system and
-;;; interfacing with ELPA, the package archive.
-;;; Move this code earlier if you want to reference
-;;; packages in your .emacs.
+(setq my-packages
+   '(use-package evil evil-leader evil-jumper deft markdown-mode
+     magit full-ack yasnippet js2-mode phi-rectangle haskell-mode))
+
 (when (>= emacs-major-version 24)
   (require 'package)
   (add-to-list 'package-archives
                '("melpa" . "http://melpa.milkbox.net/packages/") t)
   (package-initialize)
+  ;; Fetch packages from melpa/elpa if not present:
   (mapc
     (lambda (package)
       (unless (package-installed-p package)
-        (package-install package)))
-   '(use-package evil evil-leader evil-jumper deft markdown-mode
-      magit full-ack yasnippet js2-mode)))
+        (package-install package))) my-packages))
 
-(add-to-list 'load-path "~/.emacs.d")
-
-(add-to-list 'load-path "~/.emacs.d/use-package")
 (require 'use-package)
 
-(setq inhibit-splash-screen t)         ; hide welcome screen
-
+(add-to-list 'load-path "~/.emacs.d")
 ;;; Local config (not in the repository)
 (if (file-exists-p "~/.emacs.d/local/init.el")
   (load "~/.emacs.d/local/init.el"))
+
+(setq inhibit-splash-screen t)         ; hide welcome screen
 
 (menu-bar-mode -1)
 (if window-system
@@ -50,6 +46,9 @@
 ;;; Use spaces for automatic indentation
 (setq-default indent-tabs-mode nil)
 
+;;; Ask y-or-n instead of yes-or-no
+(fset 'yes-or-no-p 'y-or-n-p)
+
 (quietly-read-abbrev-file "~/.emacs.d/abbrev_defs")
 
 ;;; Interactively do things (switch buffers, open files)
@@ -57,31 +56,27 @@
 (setq completion-ignored-extensions '(".pdf" ".aux" ".toc" ".tex~"))
 (setq ido-ignore-extensions t)
 (setq ido-file-extensions-order '(".org" ".txt" ".tex" ".bib" ".el" ".xml" ".html" ".text" ".rb" ".py" ".ml" ".hs" ".cabal" ".css" ".js"))
-(add-hook 'ido-setup-hook 
-          (lambda () 
+(add-hook 'ido-setup-hook
+          (lambda ()
             (define-key ido-completion-map [tab] 'ido-next-match)))
 (ido-mode t)
 
 (cua-mode 'emacs)
 (global-set-key (kbd "M-SPC") 'cua-set-rectangle-mark)
-(use-package rect-mark)  ; enables nice-looking block visual mode
+
+(require 'phi-rectangle)  ; enables nice-looking block visual mode
 ;;; Delete selected text on insert
 (delete-selection-mode 1)
 
 ;;; Winner mode makes C-c left and C-c right cycle through
-;;; changes in window configuration.  We also bind ESC (arrow keys)
-;;; to window movement.  And, because these bindings are overridden
-;;; in org-mode, we also bind to C-x (arrow keys).
-;; (when (fboundp 'winner-mode)
-;;   (winner-mode 1)
-;;   (global-set-key (kbd "ESC <left>") 'windmove-left)
-;;   (global-set-key (kbd "ESC <right>") 'windmove-right)
-;;   (global-set-key (kbd "ESC <up>") 'windmove-up)
-;;   (global-set-key (kbd "ESC <down>") 'windmove-down)
-;;   (global-set-key (kbd "C-x <left>") 'windmove-left)
-;;   (global-set-key (kbd "C-x <right>") 'windmove-right)
-;;   (global-set-key (kbd "C-x <up>") 'windmove-up)
-;;   (global-set-key (kbd "C-x <down>") 'windmove-down))
+;;; changes in window configuration.  We also bind C-x (arrow keys)
+;;; to window movement.
+(when (fboundp 'winner-mode)
+  (winner-mode 1)
+  (global-set-key (kbd "C-x <left>") 'windmove-left)
+  (global-set-key (kbd "C-x <right>") 'windmove-right)
+  (global-set-key (kbd "C-x <up>") 'windmove-up)
+  (global-set-key (kbd "C-x <down>") 'windmove-down))
 
 ;;; Line cursor not block
 (setq-default cursor-type 'bar)
@@ -97,44 +92,42 @@
 ;; Internationalization
 (add-hook 'server-visit-hook
 	  (lambda ()
-	    (prefer-coding-system 'utf-8)
-	    (setq locale-coding-system 'utf-8)
-	    (set-terminal-coding-system 'utf-8)
-	    (set-keyboard-coding-system 'utf-8)
-	    (set-selection-coding-system 'utf-8)))
+ 	    (prefer-coding-system 'utf-8)
+ 	    (setq locale-coding-system 'utf-8)
+ 	    (set-terminal-coding-system 'utf-8)
+ 	    (set-keyboard-coding-system 'utf-8)
+ 	    (set-selection-coding-system 'utf-8)))
 
 ;;; Full screen for OSX
 
-(defun toggle-fullscreen (&optional f)
-  (interactive)
-  (let ((current-value (frame-parameter nil 'fullscreen)))
-    (set-frame-parameter nil 'fullscreen
-                         (if (equal 'fullboth current-value)
-                             (if (boundp 'old-fullscreen) old-fullscreen nil)
-                           (progn (setq old-fullscreen current-value)
-                                  'fullboth)))))
-(if (boundp 'osx-key-mode-map)
-    (define-key osx-key-mode-map (kbd "A-F") 'toggle-fullscreen))
+;; (defun toggle-fullscreen (&optional f)
+;;   (interactive)
+;;   (let ((current-value (frame-parameter nil 'fullscreen)))
+;;     (set-frame-parameter nil 'fullscreen
+;;                          (if (equal 'fullboth current-value)
+;;                              (if (boundp 'old-fullscreen) old-fullscreen nil)
+;;                            (progn (setq old-fullscreen current-value)
+;;                                   'fullboth)))))
+;; (if (boundp 'osx-key-mode-map)
+;;     (define-key osx-key-mode-map (kbd "A-F") 'toggle-fullscreen))
 
 ;;; Configuration for editing emails in mutt
-(autoload 'post-mode "post" "mode for e-mail" t)
-(add-to-list 'auto-mode-alist
-             '("\\.*mutt-*\\|.article\\|\\.followup"
-                . post-mode))
-(add-hook 'post-mode-hook
-  (lambda()
-    (set-default 'post-attachment-regexp "^[^>]*attach")
-    (auto-fill-mode t)
-    (setq fill-column 72)  ; rfc 1855 for usenet messages
-    (post-goto-body)))
+;; autoload 'post-mode "post" "mode for e-mail" t)
+;; (add-to-list 'auto-mode-alist
+;;              '("\\.*mutt-*\\|.article\\|\\.followup"
+;;                 . post-mode))
+;; (add-hook 'post-mode-hook
+;;   (lambda()
+;;     (set-default 'post-attachment-regexp "^[^>]*attach")
+;;     (auto-fill-mode t)
+;;     (setq fill-column 72)  ; rfc 1855 for usenet messages
+;;     (post-goto-body)))
 
 ;;; EVIL mode - vim bindings
 (use-package evil)
-(use-package evil-leader
-  :ensure evil-leader)
+(use-package evil-leader)
 (evil-leader/set-leader ",")
-(use-package evil-jumper
-  :ensure evil-jumper)
+(use-package evil-jumper)
 (evil-mode 1)
 (load "evil-customizations")
 
@@ -165,6 +158,7 @@
 (defun todo ()
   (interactive)
   (find-file-existing (car org-agenda-files)))
+
 (defun wiki ()
   (interactive)
   (find-file-existing wiki-entry-point))
@@ -201,9 +195,6 @@
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (setq js2-basic-offset 2)
 
-;;; Go
-;; (use-package go-mode-load)
-
 ;;; Lisp
 ;; (setq inferior-lisp-program "sbcl")
 
@@ -235,6 +226,7 @@
 ;; (autoload 'coq-mode "coq" "Major mode for editing Coq vernacular." t)
 
 ;;; LaTeX (AUCTeX)
+;; (use-package auctex)
 ;; (setq TeX-auto-save t)
 ;; (setq TeX-parse-self t)
 ;; (setq-default TeX-master nil)
@@ -247,20 +239,6 @@
 ;;                "Run make"))))
 ;; (add-hook 'LaTeX-mode-hook 'turn-on-reftex)   ; with AUCTeX LaTeX mode
 ;; (add-hook 'latex-mode-hook 'turn-on-reftex)   ; with Emacs latex mode
-
-;; from http://superuser.com/questions/125027/word-count-for-latex-within-emacs
-;; (defun my-latex-setup ()
-;;   (defun latex-word-count ()
-;;     (interactive)
-;;     (let* ((this-file (buffer-file-name))
-;;            (word-count
-;;             (with-output-to-string
-;;               (with-current-buffer standard-output
-;;                 (call-process "texcount" nil t nil "-brief" "-inc" this-file)))))
-;;       (string-match "\n$" word-count)
-;;       (message (replace-match "" nil nil word-count))))
-;;     (define-key LaTeX-mode-map "\C-cw" 'latex-word-count))
-;; (add-hook 'LaTeX-mode-hook 'my-latex-setup t)
 
 ;;; LaTeX lightweight
 (add-hook 'latex-mode-hook 'turn-on-reftex)   ; with Emacs latex mode
