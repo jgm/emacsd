@@ -9,9 +9,13 @@
                '("melpa" . "http://melpa.milkbox.net/packages/") t)
   (package-initialize)
   ;; Fetch packages from melpa/elpa if not present:
+  (defvar refreshed nil)
   (mapc
     (lambda (package)
       (unless (package-installed-p package)
+        (unless refreshed
+          (package-refresh-contents)
+          (setq refreshed t))
         (package-install package))) my-packages))
 
 (require 'use-package)
