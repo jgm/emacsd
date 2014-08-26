@@ -1,7 +1,7 @@
 (setq my-packages
    '(use-package evil evil-leader evil-jumper deft markdown-mode
      magit full-ack yasnippet js2-mode phi-rectangle haskell-mode
-     ghc))
+     ghc solarized-theme))
 
 (when (>= emacs-major-version 24)
   (require 'package)
@@ -26,6 +26,8 @@
   (load "~/.emacs.d/local/init.el"))
 
 (setq inhibit-splash-screen t)         ; hide welcome screen
+
+(load-theme 'solarized-light t)
 
 (menu-bar-mode -1)
 (if window-system
@@ -275,13 +277,6 @@
 
 ;;; LaTeX lightweight
 (add-hook 'latex-mode-hook 'turn-on-reftex)   ; with Emacs latex mode
-
-;;; Colors
-(defun colors ()
-  (interactive)
-  (use-package color-theme)
-  (color-theme-initialize)
-  (color-theme-select))
 
 ;;; Snippets
 (use-package yasnippet)
