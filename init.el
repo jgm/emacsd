@@ -143,6 +143,7 @@
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
+(add-hook 'org-mode-hook (auto-fill-mode 1))
 (setq org-return-follows-link t)
 (setq org-log-done t)
 (setq org-server "~/Dropbox/")
