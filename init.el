@@ -36,7 +36,7 @@
     (toggle-save-place-globally 1))
 (if (fboundp 'tool-bar-mode)
     (tool-bar-mode -1))
-(set-default 'line-spacing 3)
+(set-default 'line-spacing 5)
 (setq visible-bell t)   ; use visual instead of audio bell
 
 ;;; Show whitespace
