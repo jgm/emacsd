@@ -27,7 +27,7 @@
 
 (setq inhibit-splash-screen t)         ; hide welcome screen
 
-(load-theme 'solarized-light t)
+(load-theme 'solarized-dark t)
 
 (menu-bar-mode -1)
 (if window-system
