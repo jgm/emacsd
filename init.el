@@ -20,7 +20,6 @@
 
 (require 'use-package)
 
-(add-to-list 'load-path "~/.emacs.d")
 ;;; Local config (not in the repository)
 (if (file-exists-p "~/.emacs.d/local/init.el")
   (load "~/.emacs.d/local/init.el"))
@@ -136,7 +135,7 @@
 (evil-leader/set-leader ",")
 (use-package evil-jumper)
 (evil-mode 1)
-(load "evil-customizations")
+(load "~/.emacs.d/evil-customizations")
 
 ;;; Org
 ;; (use-package org-install)
