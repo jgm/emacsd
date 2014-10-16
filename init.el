@@ -1,7 +1,7 @@
 (setq my-packages
    '(use-package evil evil-leader evil-jumper deft markdown-mode
      magit full-ack yasnippet js2-mode phi-rectangle haskell-mode
-     ghc solarized-theme))
+     ghc solarized-theme helm))
 
 (when (>= emacs-major-version 24)
   (require 'package)
@@ -19,6 +19,8 @@
         (package-install package))) my-packages))
 
 (require 'use-package)
+
+(add-to-list 'load-path "~/.emacs.d/lisp/")
 
 ;;; Local config (not in the repository)
 (if (file-exists-p "~/.emacs.d/local/init.el")
@@ -57,15 +59,18 @@
 
 (quietly-read-abbrev-file "~/.emacs.d/abbrev_defs")
 
+(require 'helm-config)
+(helm-mode 1)
+
 ;;; Interactively do things (switch buffers, open files)
-(require 'ido)
-(setq completion-ignored-extensions '(".pdf" ".aux" ".toc" ".tex~"))
-(setq ido-ignore-extensions t)
-(setq ido-file-extensions-order '(".org" ".txt" ".tex" ".bib" ".el" ".xml" ".html" ".text" ".rb" ".py" ".ml" ".hs" ".cabal" ".css" ".js"))
-(add-hook 'ido-setup-hook
-          (lambda ()
-            (define-key ido-completion-map [tab] 'ido-next-match)))
-(ido-mode t)
+;; (require 'ido)
+;; (setq completion-ignored-extensions '(".pdf" ".aux" ".toc" ".tex~"))
+;; (setq ido-ignore-extensions t)
+;; (setq ido-file-extensions-order '(".org" ".txt" ".tex" ".bib" ".el" ".xml" ".html" ".text" ".rb" ".py" ".ml" ".hs" ".cabal" ".css" ".js"))
+;; (add-hook 'ido-setup-hook
+;;           (lambda ()
+;;             (define-key ido-completion-map [tab] 'ido-next-match)))
+;; (ido-mode t)
 
 (cua-mode 'emacs)
 (global-set-key (kbd "M-SPC") 'cua-set-rectangle-mark)
