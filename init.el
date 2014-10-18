@@ -60,7 +60,8 @@
 (quietly-read-abbrev-file "~/.emacs.d/abbrev_defs")
 
 (require 'helm-config)
-(helm-mode 1)
+(global-set-key (kbd "C-x b") 'helm-mini)
+;;; (helm-mode 1)
 
 ;;; Interactively do things (switch buffers, open files)
 ;; (require 'ido)
