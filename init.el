@@ -61,6 +61,7 @@
 
 (require 'helm-config)
 (global-set-key (kbd "C-x b") 'helm-mini)
+(global-set-key (kbd "C-c h o") 'helm-occur)
 ;;; (helm-mode 1)
 
 ;;; Interactively do things (switch buffers, open files)
