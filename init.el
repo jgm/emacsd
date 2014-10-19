@@ -53,6 +53,11 @@
 
 ;;; Use spaces for automatic indentation
 (setq-default indent-tabs-mode nil)
+(add-hook 'c-mode-hook (lambda ()
+                         (setq c-default-style "linux")
+                         (setq c-basic-offset 4)
+                         (setq indent-tabs-mode t)
+                         (setq 'tab-width 8)))
 
 ;;; Ask y-or-n instead of yes-or-no
 (fset 'yes-or-no-p 'y-or-n-p)
