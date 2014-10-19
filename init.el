@@ -68,9 +68,6 @@
 (global-set-key (kbd "C-x b") 'helm-mini)
 (global-set-key (kbd "C-c h o") 'helm-occur)
 (global-set-key (kbd "M-x") 'helm-M-x)
-(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebihnd tab to do persistent action
-(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
-(define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
 (setq helm-quick-update                     t ; do not display invisible candidates
       helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
       helm-buffers-fuzzy-matching           t) ; fuzzy matching buffer names when non--nil
