@@ -148,8 +148,10 @@
 ;;; EVIL mode - vim bindings
 (use-package evil)
 (use-package evil-leader)
-(evil-leader/set-leader ",")
 (use-package evil-jumper)
+(evil-leader/set-leader ",")
+(evil-leader/set-key "b" 'helm-mini)
+(global-evil-leader-mode)
 (evil-mode 1)
 (load "~/.emacs.d/evil-customizations")
 
