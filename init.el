@@ -26,6 +26,16 @@
 (if (file-exists-p "~/.emacs.d/local/init.el")
   (load "~/.emacs.d/local/init.el"))
 
+(defun ask-before-closing ()
+  "Ask whether or not to close, and then close if y was pressed"
+  (interactive)
+  (if (y-or-n-p (format "Are you sure you want to exit Emacs? "))
+      (save-buffers-kill-terminal)
+    (message "Canceled exit")))
+
+(when window-system
+  (global-set-key (kbd "C-x C-c") 'ask-before-closing))
+
 (require 'editorconfig)
 
 (setq inhibit-splash-screen t)         ; hide welcome screen
