@@ -1,7 +1,7 @@
 (setq my-packages
    '(use-package evil evil-leader evil-jumper deft markdown-mode
      magit full-ack yasnippet js2-mode phi-rectangle haskell-mode
-     ghc solarized-theme helm))
+     ghc solarized-theme helm editorconfig))
 
 (when (>= emacs-major-version 24)
   (require 'package)
@@ -25,6 +25,8 @@
 ;;; Local config (not in the repository)
 (if (file-exists-p "~/.emacs.d/local/init.el")
   (load "~/.emacs.d/local/init.el"))
+
+(require 'editorconfig)
 
 (setq inhibit-splash-screen t)         ; hide welcome screen
 
