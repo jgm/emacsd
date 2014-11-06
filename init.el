@@ -1,7 +1,7 @@
 (setq my-packages
    '(use-package evil evil-leader evil-jumper deft markdown-mode
      magit full-ack yasnippet js2-mode phi-rectangle haskell-mode
-     ghc solarized-theme helm editorconfig))
+     ghc solarized-theme helm))
 
 (when (>= emacs-major-version 24)
   (require 'package)
@@ -36,8 +36,6 @@
 (when window-system
   (global-set-key (kbd "C-x C-c") 'ask-before-closing))
 
-(require 'editorconfig)
-
 (setq inhibit-splash-screen t)         ; hide welcome screen
 
 (load-theme 'solarized-dark t)
@@ -67,7 +65,7 @@
 (setq-default indent-tabs-mode nil)
 (add-hook 'c-mode-hook (lambda ()
                          (setq c-default-style "linux")
-                         (setq c-basic-offset 4)
+                         (setq c-basic-offset 8)
                          (setq indent-tabs-mode t)
                          (setq 'tab-width 8)))
 
