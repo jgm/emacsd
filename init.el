@@ -208,6 +208,10 @@
 (use-package generalized-shell-command)
 (global-set-key (kbd "M-!") 'generalized-shell-command)
 
+;;; Note, this needs to come before the rule for markdown-mode:
+(use-package cmake-mode)
+(add-to-list 'auto-mode-alist '("^CMakeLists.txt$" . cmake-mode))
+
 ;;; Text files
 (use-package markdown-mode)
 (add-to-list 'auto-mode-alist
@@ -239,9 +243,6 @@
 ;;       ;;(paredit-mode +1)
 ;;       (setq lisp-indent-function 'common-lisp-indent-function)))
 ;; (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
-
-(use-package cmake-mode)
-(add-to-list 'auto-mode-alist '("^CMakeLists.txt$" . cmake-mode))
 
 ;;; Haskell
 (use-package haskell-mode)
