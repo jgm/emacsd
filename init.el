@@ -208,10 +208,6 @@
 (use-package generalized-shell-command)
 (global-set-key (kbd "M-!") 'generalized-shell-command)
 
-;;; Note, this needs to come before the rule for markdown-mode:
-(use-package cmake-mode)
-(add-to-list 'auto-mode-alist '("^CMakeLists.txt$" . cmake-mode))
-
 ;;; Text files
 (use-package markdown-mode)
 (add-to-list 'auto-mode-alist
@@ -223,6 +219,9 @@
 (add-hook 'text-mode-hook (lambda ()
 			    (turn-on-auto-fill)
 			    (setq indent-tabs-mode nil)))
+
+(use-package cmake-mode)
+(add-to-list 'auto-mode-alist '("CMakeLists\\.txt$" . cmake-mode))
 
 ;;; Rust
 ;; (add-to-list 'load-path "~/.emacs.d/rust")
