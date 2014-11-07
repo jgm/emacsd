@@ -1,7 +1,7 @@
 (setq my-packages
    '(use-package evil evil-leader evil-jumper deft markdown-mode
      magit full-ack yasnippet js2-mode phi-rectangle haskell-mode
-     ghc solarized-theme helm))
+     ghc solarized-theme helm cmake-mode))
 
 (when (>= emacs-major-version 24)
   (require 'package)
@@ -239,6 +239,8 @@
 ;;       ;;(paredit-mode +1)
 ;;       (setq lisp-indent-function 'common-lisp-indent-function)))
 ;; (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
+
+(use-package cmake-mode)
 
 ;;; Haskell
 (use-package haskell-mode)
