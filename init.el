@@ -241,6 +241,7 @@
 ;; (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
 
 (use-package cmake-mode)
+(add-to-list 'auto-mode-alist '("^CMakeLists.txt$" . cmake-mode)
 
 ;;; Haskell
 (use-package haskell-mode)
