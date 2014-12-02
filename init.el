@@ -1,7 +1,7 @@
 (setq my-packages
    '(use-package evil evil-leader evil-jumper deft markdown-mode
      magit full-ack yasnippet js2-mode phi-rectangle haskell-mode
-     ghc solarized-theme helm cmake-mode))
+     ghc solarized-theme helm cmake-mode lua-mode))
 
 (when (>= emacs-major-version 24)
   (require 'package)
@@ -223,6 +223,9 @@
 
 (use-package cmake-mode)
 (add-to-list 'auto-mode-alist '("CMakeLists\\.txt$" . cmake-mode))
+
+(use-package lua-mode)
+(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
 
 ;;; Rust
 ;; (add-to-list 'load-path "~/.emacs.d/rust")
