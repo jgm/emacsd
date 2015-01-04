@@ -164,6 +164,7 @@
 (evil-leader/set-key "b" 'helm-mini)
 (global-evil-leader-mode)
 (evil-mode 1)
+(evil-normal-state)
 (load "~/.emacs.d/evil-customizations")
 
 ;;; Org
