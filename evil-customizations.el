@@ -1,3 +1,4 @@
+(setq evil-default-state 'normal)
 (defun evil-space-del (statemap)
   (define-key statemap (kbd "SPC") (lambda ()
 				     (interactive)
