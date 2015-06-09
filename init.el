@@ -289,8 +289,8 @@
 ;; (autoload 'camldebug "camldebug" "Run the Caml debugger" t)
 
 ;;; Coq
-;; (setq auto-mode-alist (cons '("\\.v$" . coq-mode) auto-mode-alist))
-;; (autoload 'coq-mode "coq" "Major mode for editing Coq vernacular." t)
+(setq auto-mode-alist (cons '("\\.v$" . coq-mode) auto-mode-alist))
+(autoload 'coq-mode "coq" "Major mode for editing Coq vernacular." t)
 
 ;;; LaTeX (AUCTeX)
 ;; (use-package auctex)
