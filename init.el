@@ -289,13 +289,9 @@
 ;; (autoload 'camldebug "camldebug" "Run the Caml debugger" t)
 
 ;;; Coq
-(defun setup-coq ()
-  "Set up coq mode and proof general"
-  (interactive)
-  (load-file "/usr/local/share/emacs/site-lisp/ProofGeneral/generic/proof-site.el")
-  (setq auto-mode-alist (cons '("\\.v$" . coq-mode) auto-mode-alist))
-  (autoload 'coq-mode "coq" "Major mode for editing Coq vernacular." t)
-  (add-to-list 'load-path "/usr/local/opt/coq/lib/emacs/site-lisp"))
+(add-to-list 'load-path "/usr/local/opt/coq/lib/emacs/site-lisp")
+(setq auto-mode-alist (cons '("\\.v$" . coq-mode) auto-mode-alist))
+(autoload 'coq-mode "coq" "Major mode for editing Coq vernacular." t)
 
 ;;; LaTeX (AUCTeX)
 ;; (use-package auctex)
