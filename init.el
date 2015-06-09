@@ -289,9 +289,8 @@
 ;; (autoload 'camldebug "camldebug" "Run the Caml debugger" t)
 
 ;;; Coq
-(add-to-list 'load-path "/usr/local/opt/coq/lib/emacs/site-lisp")
-(setq auto-mode-alist (cons '("\\.v$" . coq-mode) auto-mode-alist))
-(autoload 'coq-mode "coq" "Major mode for editing Coq vernacular." t)
+;; (setq auto-mode-alist (cons '("\\.v$" . coq-mode) auto-mode-alist))
+;; (autoload 'coq-mode "coq" "Major mode for editing Coq vernacular." t)
 
 ;;; LaTeX (AUCTeX)
 ;; (use-package auctex)
