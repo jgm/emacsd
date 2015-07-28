@@ -66,9 +66,9 @@
 (setq-default indent-tabs-mode nil)
 (add-hook 'c-mode-hook (lambda ()
                          (setq c-default-style "linux")
-                         (setq c-basic-offset 8)
-                         (setq indent-tabs-mode t)
-                         (setq 'tab-width 8)))
+                         (setq c-basic-offset 2)
+                         (setq indent-tabs-mode f)
+                         (setq 'tab-width 2)))
 
 ;;; Ask y-or-n instead of yes-or-no
 (fset 'yes-or-no-p 'y-or-n-p)
