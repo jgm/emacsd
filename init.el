@@ -162,6 +162,7 @@
 (use-package evil-jumper)
 (evil-leader/set-leader ",")
 (evil-leader/set-key "b" 'helm-mini)
+(setf sentence-end-double-space nil)
 (global-evil-leader-mode)
 (evil-mode 1)
 (load "~/.emacs.d/evil-customizations")
@@ -204,6 +205,10 @@
 (setq deft-extension "txt")
 (setq deft-directory "~/Dropbox/notes/")
 (setq deft-text-mode 'markdown-mode)
+(setq deft-use-filename-as-title t)
+; (setq deft-use-filter-string-for-filename t)
+(setq deft-file-naming-rules '((noslash . "-")
+                               (nospace . "-")))
 (global-set-key [f9] 'deft)
 
 (use-package generalized-shell-command)
