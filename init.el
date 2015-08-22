@@ -216,9 +216,13 @@
 
 ;;; Text files
 (use-package markdown-mode)
+;; font-lock latex math
+(font-lock-add-keywords 'markdown-mode
+                        '(("\\$\\$?\\([^$\\[:space:]]+\\|[[:space:]]*[\\].\\|[[:space:]]+[^$]\\)*\\$\\$?" .
+                           font-lock-variable-name-face)))
 (add-hook 'markdown-mode-hook
-          ;; fix Markdown mode so it allows link labels to wrap:
           (lambda ()
+            ;; fix markdown-mode so it allows link labels to wrap:
             (remove-hook 'fill-nobreak-predicate
                          'markdown-inside-link-text-p t)))
 
