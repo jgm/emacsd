@@ -277,9 +277,10 @@
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 (add-hook 'haskell-mode-hook 'font-lock-mode)
 (global-set-key [(control meta down-mouse-3)] 'imenu)
-(setenv "PATH" (concat "~/.cabal/bin:~/Library/Haskell/bin:" (getenv "PATH")))
+
 (add-to-list 'exec-path "~/.cabal/bin")
 (add-to-list 'exec-path "~/Library/Haskell/bin")
+(add-to-list 'exec-path "~/.local/bin")
 
 (custom-set-variables
   '(haskell-process-suggest-remove-import-lines t)
