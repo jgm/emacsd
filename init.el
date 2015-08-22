@@ -230,6 +230,7 @@
              '("\\.md$" . markdown-mode))
 (add-hook 'text-mode-hook (lambda ()
 			    (turn-on-auto-fill)
+                            (local-set-key (kbd "C-c C-c") 'evil-make)
 			    (setq indent-tabs-mode nil)))
 
 (use-package cmake-mode)
