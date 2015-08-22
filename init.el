@@ -1,5 +1,5 @@
 (setq my-packages
-   '(use-package evil evil-leader evil-jumper deft markdown-mode
+   '(use-package evil evil-leader evil-jumper deft markdown-mode pandoc-mode
      magit full-ack yasnippet js2-mode phi-rectangle haskell-mode
      ghc solarized-theme helm cmake-mode lua-mode))
 
