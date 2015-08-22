@@ -229,8 +229,10 @@
 (use-package markdown-mode)
 ;; font-lock latex math
 (font-lock-add-keywords 'markdown-mode
-                        '(("\\$\\$?\\([^$\\[:space:]]+\\|[[:space:]]*[\\].\\|[[:space:]]+[^$]\\)*\\$\\$?" .
-                           font-lock-variable-name-face)))
+                        '(("\\(\\$\\$?\\)\\(\\(?:[^$\\[:space:]]+\\|[[:space:]]*[\\].\\|[[:space:]]+[^$]\\)*\\)\\(\\$\\$?\\)"
+                           (1 font-lock-comment-delimiter-face)
+                           (2 font-lock-variable-name-face)
+                           (3 font-lock-comment-delimiter-face))))
 (add-hook 'markdown-mode-hook
           (lambda ()
             ;; fix markdown-mode so it allows link labels to wrap:
