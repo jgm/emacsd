@@ -144,6 +144,17 @@
 (if (boundp 'osx-key-mode-map)
     (define-key osx-key-mode-map (kbd "A-F") 'toggle-fullscreen))
 
+(when (and (display-graphic-p) (eq system-type 'darwin))
+  ;; default Latin font (e.g. Consolas)
+  (set-face-attribute 'default nil :family "Consolas")
+  ;; default font size (point * 10)
+  ;;
+  ;; WARNING!  Depending on the default font,
+  ;; if the size is not supported very well, the frame will be clipped
+  ;; so that the beginning of the buffer may not be visible correctly.
+  (set-face-attribute 'default nil :height 160)
+  (add-to-list 'default-frame-alist '(height . 52)))
+
 ;;; Configuration for editing emails in mutt
 ;; autoload 'post-mode "post" "mode for e-mail" t)
 ;; (add-to-list 'auto-mode-alist
