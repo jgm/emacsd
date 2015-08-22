@@ -1,5 +1,5 @@
 (setq my-packages
-   '(use-package evil evil-leader evil-jumper deft markdown-mode pandoc-mode
+   '(use-package evil evil-leader evil-jumper deft markdown-mode
      magit full-ack yasnippet js2-mode phi-rectangle haskell-mode
      ghc solarized-theme helm cmake-mode lua-mode))
 
@@ -240,11 +240,11 @@
                          'markdown-inside-link-text-p t)))
 
 (add-to-list 'auto-mode-alist
-	     '("\\.txt$" . pandoc-mode))
+	     '("\\.txt$" . markdown-mode))
 (add-to-list 'auto-mode-alist
-             '("\\.markdown$" . pandoc-mode))
+             '("\\.markdown$" . markdown-mode))
 (add-to-list 'auto-mode-alist
-             '("\\.md$" . pandoc-mode))
+             '("\\.md$" . markdown-mode))
 (add-hook 'text-mode-hook (lambda ()
 			    (turn-on-auto-fill)
                             (local-set-key (kbd "C-c C-c") 'evil-make)
