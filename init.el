@@ -216,6 +216,12 @@
 
 ;;; Text files
 (use-package markdown-mode)
+(add-hook 'markdown-mode-hook
+          ;; fix Markdown mode so it allows link labels to wrap:
+          (lambda ()
+            (remove-hook 'fill-nobreak-predicate
+                         'markdown-inside-link-text-p t)))
+
 (add-to-list 'auto-mode-alist
 	     '("\\.txt$" . markdown-mode))
 (add-to-list 'auto-mode-alist
