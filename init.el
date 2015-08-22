@@ -240,11 +240,11 @@
                          'markdown-inside-link-text-p t)))
 
 (add-to-list 'auto-mode-alist
-	     '("\\.txt$" . markdown-mode))
+	     '("\\.txt$" . pandoc-mode))
 (add-to-list 'auto-mode-alist
-             '("\\.markdown$" . markdown-mode))
+             '("\\.markdown$" . pandoc-mode))
 (add-to-list 'auto-mode-alist
-             '("\\.md$" . markdown-mode))
+             '("\\.md$" . pandoc-mode))
 (add-hook 'text-mode-hook (lambda ()
 			    (turn-on-auto-fill)
                             (local-set-key (kbd "C-c C-c") 'evil-make)
