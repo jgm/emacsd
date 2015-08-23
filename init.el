@@ -78,6 +78,7 @@
 (require 'helm-config)
 (global-set-key (kbd "C-x b") 'helm-mini)
 (global-set-key (kbd "C-c h o") 'helm-occur)
+(global-set-key (kbd "C-c C-f") 'helm-find-files)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (setq helm-quick-update                     t ; do not display invisible candidates
       helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
